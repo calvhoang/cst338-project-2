@@ -28,15 +28,15 @@ public interface UserDAO {
     LiveData<List<User>> getAllUsers();
 
     // Deletes all records from the User table.
-    @Query("DELETE from " + AppDatabase.USER_TABLE)
+    @Query("DELETE FROM " + AppDatabase.USER_TABLE)
     void deleteAll();
 
     // Retrieves a user by their username.
-    @Query("SELECT * from " + AppDatabase.USER_TABLE + " WHERE username == :username")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username == :username")
     LiveData<User> getUserByUserName(String username);
 
     // Retrieves a user by their user ID.
-    @Query("SELECT * from " + AppDatabase.USER_TABLE + " WHERE id == :userId")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
 
 
