@@ -1,0 +1,66 @@
+package com.example.restauranttracker.Database;
+
+import android.content.Context;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.User;
+import com.example.restauranttracker.Database.entities.UserRestaurant;
+import com.example.restauranttracker.MainActivity;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(
+        entities = {Restaurant.class, User.class, UserRestaurant.class},
+        version = 1,
+        exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
+
+    public static final String DATABASE_NAME = "Restaurant_Tracker_Database";
+    public static final String RESTAURANT_TABLE = "restaurantTable";
+    public static final String USER_TABLE = "userTable";
+    public static final String USER_RESTAURANT_TABLE = "userRestaurantTable";
+
+    private static volatile AppDatabase INSTANCE;
+    private static final int NUMBER_OF_THREADS = 4;
+
+    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+    static AppDatabase getDatabase(final Context context){
+        if(INSTANCE == null){
+            synchronized (AppDatabase.class){
+                if(INSTANCE == null){
+                    INSTANCE = Room.databaseBuilder(
+                                    context.getApplicationContext(),
+                                    AppDatabase.class,
+                                    DATABASE_NAME
+                            )
+                            .fallbackToDestructiveMigration()
+                            .addCallback(addDefaultValues)
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+    public static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            Log.i(MainActivity.TAG, "DATABASE CREATED!");
+            // TODO: add databaseWriteExecutor
+        }
+    };
+
+    public abstract RestaurantDAO restaurantDAO();
+    public abstract UserDAO userDao();
+    public abstract UserRestaurantDAO userRestaurantDAO();
+}

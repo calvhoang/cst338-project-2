@@ -210,3 +210,25 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Java template
+# Compiled class file
+
+# Log file
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+
+# Package Files #
+*.jar
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+replay_pid*
+
+# Android Profiling
+*.hprof
