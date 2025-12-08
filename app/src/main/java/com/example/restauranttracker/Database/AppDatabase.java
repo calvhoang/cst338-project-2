@@ -19,4 +19,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String USER_RESTAURANT_TABLE = "userRestaurantTable";
 
 
+
+    public abstract RestaurantDAO restaurantDAO();
+    public abstract UserDAO userDao();
+    public abstract UserRestaurantDAO userRestaurantDAO();
 }
