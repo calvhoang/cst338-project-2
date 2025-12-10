@@ -1,6 +1,7 @@
 package com.example.restauranttracker.Database.entities;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.example.restauranttracker.Database.AppDatabase;
 

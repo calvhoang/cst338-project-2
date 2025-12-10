@@ -6,4 +6,6 @@
     <string name="restaurant_tracker">Restaurant Tracker</string>
     <string name="register">Register</string>
     <string name="sign_up">Sign Up</string>
+    <string name="landing_page">Landing Page</string>
+    <string name="admin">Admin</string>
 </resources>
