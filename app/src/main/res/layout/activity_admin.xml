@@ -2,25 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AdminActivity">
 
     <TextView
-        android:id="@+id/landing_title"
+        android:id="@+id/admin_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/landing_page"
+        android:text="@string/admin"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/landing_username"
+        android:id="@+id/landing_username_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -35,18 +34,18 @@
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="100dp"
-        android:text="My Restaurants"
+        android:text="View Users"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/landing_title" />
+        app:layout_constraintTop_toBottomOf="@id/admin_title" />
 
     <Button
         android:id="@+id/add_restaurant_button"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:text="Add Restaurant"
+        android:text="Change Username"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,23 +56,10 @@
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:text="Randomize"
+        android:text="Change Password"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_restaurant_button" />
-
-    <Button
-        android:id="@+id/admin_button"
-        android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:text="Admin"
-        android:textSize="24sp"
-        android:enabled="false"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/randomize_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
