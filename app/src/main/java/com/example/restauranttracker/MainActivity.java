@@ -3,12 +3,11 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.databinding.ActivityLoginBinding;
 import com.example.restauranttracker.databinding.ActivityMainBinding;
 
 
@@ -25,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        View view = binding.getRoot();
+        setContentView(view);
 
+        setupButtonNavigation();
         loginUser();
 
         if(loggedInUserId == -1){
@@ -34,11 +35,44 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         repository = AppRepository.getRepository(getApplication());
-
     }
 
     private void loginUser(){
         loggedInUserId = getIntent().getIntExtra(TAG, -1);
+    }
+
+    // TODO: set up intents
+    private void setupButtonNavigation() {
+        binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
+    private void setupAdminButton() {
+        // TODO: check if user is admin
+        binding.adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId) {
