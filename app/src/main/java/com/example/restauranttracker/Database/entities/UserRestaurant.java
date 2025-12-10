@@ -13,14 +13,14 @@ import java.util.Objects;
         foreignKeys = {
                 @ForeignKey(
                         entity = Restaurant.class,
-                        parentColumns = "id",
-                        childColumns = "id",
+                        parentColumns = "restaurantId",
+                        childColumns = "restaurantId",
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
                         entity = User.class,
-                        parentColumns = "restaurantId",
-                        childColumns = "restaurantId",
+                        parentColumns = "id",
+                        childColumns = "userId",
                         onDelete = ForeignKey.CASCADE
                 )
         })
@@ -31,6 +31,8 @@ public class UserRestaurant {
     private int rating;
     private boolean hasBeenTo;
     private LocalDateTime date;
+    public int userId;
+    public int restaurantId;
 
     public UserRestaurant(int userRestaurantId, int rating, boolean hasBeenTo) {
         this.userRestaurantId = userRestaurantId;
