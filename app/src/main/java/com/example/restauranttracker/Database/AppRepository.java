@@ -39,14 +39,21 @@ public class AppRepository {
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.d(MainActivity.TAG, "Problem getting GymLogRepository, thread error.");
+            Log.d(MainActivity.TAG, "Problem getting AppRepository, thread error.");
         }
         return null;
     }
 
-
-
-
+    // Method to insert a user into the database.
+    public void insertUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.insert(user);
+        });
+    }
+    public Boolean userNameExists(String username){
+        return (AppDatabase.USER_TABLE.contains(username));
+    }
 
     // Method to get a user by username from the database.
     public LiveData<User> getUserByUserName(String username) {

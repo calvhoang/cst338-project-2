@@ -4,20 +4,41 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.restauranttracker.Database.AppRepository;
+import com.example.restauranttracker.databinding.ActivityLoginBinding;
+import com.example.restauranttracker.databinding.ActivityMainBinding;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
+    private AppRepository repository;
+
     public static final String TAG = "RESTAURANT_TRACKER_APP";
+
+    int loggedInUserId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        loginUser();
+
+        if(loggedInUserId == -1){
+            Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
+            startActivity(intent);
+        }
+        repository = AppRepository.getRepository(getApplication());
+
+    }
+
+    private void loginUser(){
+        loggedInUserId = getIntent().getIntExtra(TAG, -1);
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId) {

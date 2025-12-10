@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Login button clicked", Toast.LENGTH_SHORT).show();
                 verifyUser();
             }
         });
@@ -38,8 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Register button clicked", Toast.LENGTH_SHORT).show();
-                // Navigate to RegisterActivity
+                startActivity(SignUpActivity.SignUpIntentFactory(getApplicationContext())); 
             }
         });
 
