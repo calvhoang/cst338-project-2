@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         loggedInUserId = getIntent().getIntExtra(TAG, -1);
     }
 
-    // TODO: set up intents
+    // TODO: set up intents & intent factories
     private void setupButtonNavigation() {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
