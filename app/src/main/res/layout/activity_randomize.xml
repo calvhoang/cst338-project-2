@@ -18,4 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/randomize_restaurant"
+        android:layout_width="380dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="136dp"
+        android:text="restaurant info placeholder"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/randomize_title" />
+
+    <Button
+        android:id="@+id/add_restaurant_button"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
+        android:text="Randomize"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/randomize_restaurant"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
