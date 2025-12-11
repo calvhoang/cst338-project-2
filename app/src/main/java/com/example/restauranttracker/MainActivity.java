@@ -3,6 +3,7 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupButtonNavigation();
         loginUser();
 
         if(loggedInUserId == -1){
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         repository = AppRepository.getRepository(getApplication());
+        setupButtonNavigation();
     }
 
     private void loginUser(){
@@ -62,10 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        repository.isUserAdmin(loggedInUserId).observe(this, isAdmin -> {
+            if (Boolean.TRUE.equals(isAdmin)) {
+                setupAdminButton();
+            }
+        });
     }
 
     private void setupAdminButton() {
-        // TODO: check if user is admin
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -60,7 +60,7 @@ public class AppRepository {
         return userDAO.getUserByUserName(username);
     }
 
-    public Boolean isAdmin(String userId) {
+    public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
 }

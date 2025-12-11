@@ -40,7 +40,7 @@ public interface UserDAO {
     LiveData<User> getUserByUserId(int userId);
 
     @Query("SELECT isAdmin FROM " + AppDatabase.USER_TABLE + " WHERE id = :userId LIMIT 1")
-    Boolean isAdmin(String userId);
+    LiveData<Boolean> isAdmin(int userId);
 
 
 }
