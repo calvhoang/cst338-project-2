@@ -23,5 +23,5 @@ public interface UserRestaurantDAO {
     void deleteAll();
 
     @Query("SELECT * FROM " + AppDatabase.USER_RESTAURANT_TABLE + " WHERE userId == :userId")
-    LiveData<User> getRestaurantByUserId(int userId);
+    LiveData<UserRestaurant> getRestaurantByUserId(int userId);
 }
