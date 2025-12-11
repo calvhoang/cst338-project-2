@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         loggedInUserId = getIntent().getIntExtra(TAG, -1);
     }
 
-    // TODO: set up intents & intent factories
     private void setupButtonNavigation() {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,9 +69,12 @@ public class MainActivity extends AppCompatActivity {
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AdminActivity.adminActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
+        binding.adminButton.setEnabled(true);
+        binding.adminButton.setVisibility(View.VISIBLE);
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId) {
