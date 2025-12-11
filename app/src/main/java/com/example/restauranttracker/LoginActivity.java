@@ -11,13 +11,11 @@ import androidx.lifecycle.LiveData;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityLoginBinding;
+
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private AppRepository repository;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

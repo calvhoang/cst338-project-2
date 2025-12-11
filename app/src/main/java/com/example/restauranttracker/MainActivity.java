@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
         setupButtonNavigation();
         loginUser();
@@ -46,21 +45,24 @@ public class MainActivity extends AppCompatActivity {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = RestaurantsActivity.restaurantsActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
 
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AddRestaurantActivity.addRestaurantActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
 
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = RandomizeActivity.randomizeActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
     }
