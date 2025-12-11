@@ -7,11 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
+import com.example.restauranttracker.Database.typeConverters.LocalDateTypeConverter;
 import com.example.restauranttracker.MainActivity;
 
 import java.util.concurrent.ExecutorService;
@@ -21,6 +24,7 @@ import java.util.concurrent.Executors;
         entities = {Restaurant.class, User.class, UserRestaurant.class},
         version = 1,
         exportSchema = false)
+@TypeConverters(LocalDateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
     public static final String DATABASE_NAME = "Restaurant_Tracker_Database";
