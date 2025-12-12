@@ -8,4 +8,5 @@
     <string name="sign_up">Sign Up</string>
     <string name="landing_page">Landing Page</string>
     <string name="admin">Admin</string>
+    <string name="logged_in">LOGGED IN</string>
 </resources>
