@@ -15,6 +15,8 @@ public class Restaurant {
     private String name;
     private String cuisine;
 
+    private String city;
+
     public Restaurant(int restaurantId, String name, String cuisine) {
         this.restaurantId = restaurantId;
         this.name = name;
@@ -43,6 +45,14 @@ public class Restaurant {
 
     public void setCuisine(String cuisine) {
         this.cuisine = cuisine;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Override
