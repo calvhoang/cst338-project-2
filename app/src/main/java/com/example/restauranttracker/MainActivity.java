@@ -3,6 +3,7 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
-        setupButtonNavigation();
         loginUser();
 
         if(loggedInUserId == -1){
@@ -35,44 +34,53 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         repository = AppRepository.getRepository(getApplication());
+        setupButtonNavigation();
     }
 
     private void loginUser(){
         loggedInUserId = getIntent().getIntExtra(TAG, -1);
     }
 
-    // TODO: set up intents & intent factories
     private void setupButtonNavigation() {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = RestaurantsActivity.restaurantsActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AddRestaurantActivity.addRestaurantActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = RandomizeActivity.randomizeActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
 
+        repository.isUserAdmin(loggedInUserId).observe(this, isAdmin -> {
+            if (Boolean.TRUE.equals(isAdmin)) {
+                setupAdminButton();
             }
         });
     }
 
     private void setupAdminButton() {
-        // TODO: check if user is admin
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AdminActivity.adminActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
+        binding.adminButton.setEnabled(true);
+        binding.adminButton.setVisibility(View.VISIBLE);
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId) {

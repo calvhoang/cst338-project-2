@@ -59,4 +59,8 @@ public class AppRepository {
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
     }
+
+    public LiveData<Boolean> isUserAdmin(int userId) {
+        return userDAO.isAdmin(userId);
+    }
 }

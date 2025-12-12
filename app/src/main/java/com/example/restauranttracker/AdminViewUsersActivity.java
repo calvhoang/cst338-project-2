@@ -1,6 +1,6 @@
 package com.example.restauranttracker;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class AdminViewUsersActivity extends Activity {
+public class AdminViewUsersActivity extends AppCompatActivity {
 }
