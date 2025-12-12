@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
@@ -22,7 +23,7 @@ import java.util.concurrent.Executors;
 
 @Database(
         entities = {Restaurant.class, User.class, UserRestaurant.class},
-        version = 1,
+        version = 2,
         exportSchema = false)
 @TypeConverters(LocalDateTypeConverter.class)
 public abstract class AppDatabase extends RoomDatabase {

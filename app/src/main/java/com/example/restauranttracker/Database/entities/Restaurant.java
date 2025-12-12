@@ -59,11 +59,11 @@ public class Restaurant {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant that = (Restaurant) o;
-        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(cuisine, that.cuisine);
+        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(cuisine, that.cuisine) && Objects.equals(city, that.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(restaurantId, name, cuisine);
+        return Objects.hash(restaurantId, name, cuisine, city);
     }
 }

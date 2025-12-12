@@ -1,5 +1,7 @@
 package com.example.restauranttracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +34,8 @@ public class AddRestaurantActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: insert into database method;
+
     private void getUserInput() {
         restaurantName = binding.restaurantNameInput.getText().toString();
         cuisine = binding.restaurantCuisineInput.getText().toString();
@@ -42,6 +46,11 @@ public class AddRestaurantActivity extends AppCompatActivity {
             Log.d(MainActivity.TAG, "Error reading value from Rating EditText");
         }
         visited = binding.restaurantVisitedCheckbox.isChecked();
+    }
+
+    static Intent addRestaurantActivityIntentFactory(Context context) {
+        Intent intent = new Intent(context, AddRestaurantActivity.class);
+        return intent;
     }
 
 }
