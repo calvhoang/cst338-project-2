@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.restaurant_tracker.SAVED_INSTANCE_STATE_USERID_KEY";
 
-    private static final int LOGGED_OUT = -1;
+    public static final int LOGGED_OUT = -1;
 
     public static final String TAG = "RESTAURANT_TRACKER_APP";
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         repository = AppRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        if(loggedInUserId == -1){
+        if(loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
     }
     
 
-    // TODO: set up intents & intent factories
     private void setupButtonNavigation() {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override

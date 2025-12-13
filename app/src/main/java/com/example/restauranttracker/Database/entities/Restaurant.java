@@ -11,23 +11,23 @@ import java.util.Objects;
 public class Restaurant {
 
     @PrimaryKey(autoGenerate = true)
-    private int restaurantId;
+    private long restaurantId;
     private String name;
     private String cuisine;
 
     private String city;
 
-    public Restaurant(int restaurantId, String name, String cuisine) {
-        this.restaurantId = restaurantId;
+    public Restaurant(String name, String cuisine, String city) {
         this.name = name;
         this.cuisine = cuisine;
+        this.city = city;
     }
 
-    public int getRestaurantId() {
+    public long getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(int restaurantId) {
+    public void setRestaurantId(long restaurantId) {
         this.restaurantId = restaurantId;
     }
 

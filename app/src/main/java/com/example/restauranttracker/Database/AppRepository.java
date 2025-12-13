@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
@@ -70,6 +71,26 @@ public class AppRepository {
     }
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
+    }
+
+    /*
+    public void insertRestaurant(Restaurant restaurant) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            restaurantDAO.insert(restaurant);
+        });
+    } */
+
+    public long insertRestaurant(Restaurant restaurant) {
+        return restaurantDAO.insert(restaurant);
+    }
+
+    /*
+    public LiveData<Restaurant> getRestaurantInfo(String restaurantName, String cuisine, String city) {
+        return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
+    } */
+
+    public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
+        return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
     }
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {
