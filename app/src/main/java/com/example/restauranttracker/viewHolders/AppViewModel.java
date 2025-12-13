@@ -1,18 +1,14 @@
 package com.example.restauranttracker.viewHolders;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.Restaurant;
-import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
-import com.example.restauranttracker.MainActivity;
 
 public class AppViewModel extends AndroidViewModel {
 
@@ -26,10 +22,6 @@ public class AppViewModel extends AndroidViewModel {
     public long insertRestaurant(Restaurant restaurant) {
         return repository.insertRestaurant(restaurant);
     }
-/*
-    public LiveData<Restaurant> getRestaurantInfo(String restaurantName, String cuisine, String city) {
-        return repository.getRestaurantInfo(restaurantName, cuisine, city);
-    } */
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {
         repository.insertUserRestaurant(userRestaurant);

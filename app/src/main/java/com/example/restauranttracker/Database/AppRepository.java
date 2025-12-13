@@ -73,21 +73,13 @@ public class AppRepository {
         return userDAO.isAdmin(userId);
     }
 
-    /*
-    public void insertRestaurant(Restaurant restaurant) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            restaurantDAO.insert(restaurant);
-        });
-    } */
-
     public long insertRestaurant(Restaurant restaurant) {
         return restaurantDAO.insert(restaurant);
     }
 
-    /*
-    public LiveData<Restaurant> getRestaurantInfo(String restaurantName, String cuisine, String city) {
-        return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
-    } */
+    public LiveData<Restaurant> getRestaurantInfoLiveData(String restaurantName, String cuisine, String city) {
+        return restaurantDAO.getRestaurantInfoLiveData(restaurantName, cuisine, city);
+    }
 
     public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);

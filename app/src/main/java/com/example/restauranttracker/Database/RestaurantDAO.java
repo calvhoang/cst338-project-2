@@ -26,6 +26,9 @@ public interface RestaurantDAO {
     @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE + " WHERE name == :name AND cuisine == :cuisine AND city == :city LIMIT 1")
     Restaurant getRestaurantInfo(String name, String cuisine, String city);
 
+    @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE + " WHERE name == :name AND cuisine == :cuisine AND city == :city")
+    LiveData<Restaurant> getRestaurantInfoLiveData(String name, String cuisine, String city);
+
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();
 }
