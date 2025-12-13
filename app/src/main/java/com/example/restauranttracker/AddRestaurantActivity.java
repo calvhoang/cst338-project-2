@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -44,9 +45,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getUserInput();
-                Log.i("Calvin", "User input success");
                 insertRestaurantInfo();
-                Log.i("Calvin", "Insert restaurant info success");
             }
         });
     }
@@ -72,9 +71,13 @@ public class AddRestaurantActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE);
         int userId = sharedPreferences.getInt(getString(R.string.preference_userId_key), MainActivity.LOGGED_OUT);
-        Log.i("Calvin", "User id success: " + userId);
         viewModel.insertRestaurantWithUser(userId, restaurantName, cuisine, city, rating, visited);
-        Log.i("Calvin", "Insert Restaurant with User success");
+
+        toastMaker("Added " + restaurantName);
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     static Intent addRestaurantActivityIntentFactory(Context context) {
