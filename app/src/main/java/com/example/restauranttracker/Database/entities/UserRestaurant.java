@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = AppDatabase.USER_RESTAURANT_TABLE,
+        primaryKeys = {"userId", "restaurantId"},
         foreignKeys = {
                 @ForeignKey(
                         entity = Restaurant.class,

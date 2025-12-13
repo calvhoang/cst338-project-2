@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 @Dao

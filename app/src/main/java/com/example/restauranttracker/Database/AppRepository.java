@@ -9,7 +9,6 @@ import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
 
-import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -56,7 +55,8 @@ public class AppRepository {
             userDAO.insert(user);
         });
     }
-    public Boolean userNameExists(String username){
+
+    public Boolean userNameExists(String username) {
         return (AppDatabase.USER_TABLE.contains(username));
     }
 
@@ -73,6 +73,8 @@ public class AppRepository {
     }
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {
-
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userRestaurantDAO.insert(userRestaurant);
+        });
     }
 }
