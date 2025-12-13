@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -101,33 +102,42 @@ public class MainActivity extends AppCompatActivity {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = RestaurantsActivity.restaurantsActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AddRestaurantActivity.addRestaurantActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
-
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = RandomizeActivity.randomizeActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
 
+        repository.isUserAdmin(loggedInUserId).observe(this, isAdmin -> {
+            if (Boolean.TRUE.equals(isAdmin)) {
+                setupAdminButton();
             }
         });
     }
 
     private void setupAdminButton() {
-        // TODO: check if user is admin
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = AdminActivity.adminActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
+        binding.adminButton.setEnabled(true);
+        binding.adminButton.setVisibility(View.VISIBLE);
     }
 
     @Override
