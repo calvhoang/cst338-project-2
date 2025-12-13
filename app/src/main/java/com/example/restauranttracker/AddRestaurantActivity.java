@@ -62,7 +62,6 @@ public class AddRestaurantActivity extends AppCompatActivity {
         visited = binding.restaurantVisitedCheckbox.isChecked();
     }
 
-    // TODO: insert into database method;
     private void insertRestaurantInfo() {
         if (restaurantName.isEmpty()) {
             return;
