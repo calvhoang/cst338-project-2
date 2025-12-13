@@ -60,6 +60,9 @@ public class AppRepository {
         return userDAO.getUserByUserName(username);
     }
 
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }

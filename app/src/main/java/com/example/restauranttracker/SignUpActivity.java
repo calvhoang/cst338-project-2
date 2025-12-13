@@ -3,16 +3,21 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 
 import com.example.restauranttracker.databinding.ActivitySignUpBinding;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -28,6 +33,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        repository = AppRepository.getRepository(getApplication());
 
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,10 +61,12 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Password must Be at least 5 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
-        repository.insertUser(new User(username, password));
-        //Navigate to menu page
-        startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), 1));
+        User newUser = new User(username, password);
+        repository.insertUser(newUser);
+        LiveData<User> userObserver = repository.getUserByUserName(username);
+        userObserver.observe(this, user -> {
+            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+        });
     }
-
 
 }
