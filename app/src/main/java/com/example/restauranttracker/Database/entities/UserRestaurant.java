@@ -26,28 +26,18 @@ import java.util.Objects;
                 )
         })
 public class UserRestaurant {
-
-    @PrimaryKey(autoGenerate = true)
-    private int userRestaurantId;
+    public int userId;
+    public int restaurantId;
     private int rating;
     private boolean hasBeenTo;
     private LocalDateTime date;
-    public int userId;
-    public int restaurantId;
 
-    public UserRestaurant(int userRestaurantId, int rating, boolean hasBeenTo) {
-        this.userRestaurantId = userRestaurantId;
+    public UserRestaurant(int userId, int restaurantId, int rating, boolean hasBeenTo, LocalDateTime date) {
+        this.userId = userId;
+        this.restaurantId = restaurantId;
         this.rating = rating;
         this.hasBeenTo = hasBeenTo;
-        date = LocalDateTime.now();
-    }
-
-    public int getUserRestaurantId() {
-        return userRestaurantId;
-    }
-
-    public void setUserRestaurantId(int userRestaurantId) {
-        this.userRestaurantId = userRestaurantId;
+        this.date = date;
     }
 
     public int getRating() {
@@ -78,11 +68,11 @@ public class UserRestaurant {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UserRestaurant that = (UserRestaurant) o;
-        return userRestaurantId == that.userRestaurantId && rating == that.rating && hasBeenTo == that.hasBeenTo && Objects.equals(date, that.date);
+        return rating == that.rating && hasBeenTo == that.hasBeenTo && userId == that.userId && restaurantId == that.restaurantId && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userRestaurantId, rating, hasBeenTo, date);
+        return Objects.hash(rating, hasBeenTo, date, userId, restaurantId);
     }
 }
