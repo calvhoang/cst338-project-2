@@ -11,21 +11,23 @@ import java.util.Objects;
 public class Restaurant {
 
     @PrimaryKey(autoGenerate = true)
-    private int restaurantId;
+    private long restaurantId;
     private String name;
     private String cuisine;
 
-    public Restaurant(int restaurantId, String name, String cuisine) {
-        this.restaurantId = restaurantId;
+    private String city;
+
+    public Restaurant(String name, String cuisine, String city) {
         this.name = name;
         this.cuisine = cuisine;
+        this.city = city;
     }
 
-    public int getRestaurantId() {
+    public long getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(int restaurantId) {
+    public void setRestaurantId(long restaurantId) {
         this.restaurantId = restaurantId;
     }
 
@@ -45,15 +47,23 @@ public class Restaurant {
         this.cuisine = cuisine;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant that = (Restaurant) o;
-        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(cuisine, that.cuisine);
+        return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(cuisine, that.cuisine) && Objects.equals(city, that.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(restaurantId, name, cuisine);
+        return Objects.hash(restaurantId, name, cuisine, city);
     }
 }

@@ -15,13 +15,19 @@ import java.util.List;
 public interface RestaurantDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Restaurant... restaurant);
+    long insert(Restaurant restaurant);
 
     @Delete
     void delete(Restaurant... restaurant);
 
     @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE)
     LiveData<List<Restaurant>> getAllRestaurants();
+
+    @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE + " WHERE name == :name AND cuisine == :cuisine AND city == :city LIMIT 1")
+    Restaurant getRestaurantInfo(String name, String cuisine, String city);
+
+    @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE + " WHERE name == :name AND cuisine == :cuisine AND city == :city")
+    LiveData<Restaurant> getRestaurantInfoLiveData(String name, String cuisine, String city);
 
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();

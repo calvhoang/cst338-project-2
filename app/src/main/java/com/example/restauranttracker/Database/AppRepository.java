@@ -5,22 +5,27 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.User;
+import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
 
-import java.util.ArrayList;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class AppRepository {
     private final UserDAO userDAO;
+    private final RestaurantDAO restaurantDAO;
+    private final UserRestaurantDAO userRestaurantDAO;
     private static AppRepository repository;
 
     // Singleton pattern to ensure only one instance of the repository exists.
     private AppRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         this.userDAO = db.userDao();
+        this.restaurantDAO = db.restaurantDAO();
+        this.userRestaurantDAO = db.userRestaurantDAO();
     }
 
     // Method to get the singleton instance of the repository.
@@ -51,7 +56,8 @@ public class AppRepository {
             userDAO.insert(user);
         });
     }
-    public Boolean userNameExists(String username){
+
+    public Boolean userNameExists(String username) {
         return (AppDatabase.USER_TABLE.contains(username));
     }
 
@@ -65,5 +71,23 @@ public class AppRepository {
     }
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
+    }
+
+    public long insertRestaurant(Restaurant restaurant) {
+        return restaurantDAO.insert(restaurant);
+    }
+
+    public LiveData<Restaurant> getRestaurantInfoLiveData(String restaurantName, String cuisine, String city) {
+        return restaurantDAO.getRestaurantInfoLiveData(restaurantName, cuisine, city);
+    }
+
+    public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
+        return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
+    }
+
+    public void insertUserRestaurant(UserRestaurant userRestaurant) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            userRestaurantDAO.insert(userRestaurant);
+        });
     }
 }
