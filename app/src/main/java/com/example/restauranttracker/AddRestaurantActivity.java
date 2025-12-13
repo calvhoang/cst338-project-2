@@ -8,11 +8,13 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.databinding.ActivityAddRestaurantBinding;
 
 public class AddRestaurantActivity extends AppCompatActivity {
 
     ActivityAddRestaurantBinding binding;
+    AppRepository repository;
 
     String restaurantName = "";
     String cuisine = "";
@@ -30,11 +32,10 @@ public class AddRestaurantActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getUserInput();
+                insertRestaurant();
             }
         });
     }
-
-    // TODO: insert into database method;
 
     private void getUserInput() {
         restaurantName = binding.restaurantNameInput.getText().toString();
@@ -46,6 +47,15 @@ public class AddRestaurantActivity extends AppCompatActivity {
             Log.d(MainActivity.TAG, "Error reading value from Rating EditText");
         }
         visited = binding.restaurantVisitedCheckbox.isChecked();
+    }
+
+    // TODO: insert into database method;
+    private void insertRestaurant() {
+        if (restaurantName.isEmpty()) {
+            return;
+        }
+
+
     }
 
     static Intent addRestaurantActivityIntentFactory(Context context) {
