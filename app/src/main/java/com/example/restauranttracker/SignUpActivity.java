@@ -3,6 +3,7 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,9 @@ import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 
 import com.example.restauranttracker.databinding.ActivitySignUpBinding;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class SignUpActivity extends AppCompatActivity {
 
