@@ -26,6 +26,8 @@
         <activity
             android:name=".RandomizeActivity"
             android:exported="false" />
+        <activity android:name=".AdminViewUsersActivity"
+            android:exported="false" />
         <activity
             android:name=".AdminActivity"
             android:exported="false" />

@@ -9,6 +9,7 @@ import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.MainActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -65,5 +66,9 @@ public class AppRepository {
     }
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
+    }
+
+    public LiveData<List<User>> getAllUsers(){
+        return userDAO.getAllUsers();
     }
 }
