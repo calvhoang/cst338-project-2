@@ -10,6 +10,7 @@ import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -83,6 +84,10 @@ public class AppRepository {
 
     public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
+    }
+
+    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantByUserId(int userId) {
+        return restaurantDAO.getRestaurantByUserId(userId);
     }
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {
