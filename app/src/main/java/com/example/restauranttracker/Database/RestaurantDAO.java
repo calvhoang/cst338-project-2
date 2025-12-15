@@ -29,11 +29,12 @@ public interface RestaurantDAO {
     @Query("SELECT * FROM " + AppDatabase.RESTAURANT_TABLE + " WHERE name == :name AND cuisine == :cuisine AND city == :city")
     LiveData<Restaurant> getRestaurantInfoLiveData(String name, String cuisine, String city);
 
+    // Gets all restaurants by userId
     @Query("SELECT res.*, userRes.restaurantId, userRes.rating, userRes.visited, userRes.date FROM "
             + AppDatabase.RESTAURANT_TABLE + " res "
             + " INNER JOIN " + AppDatabase.USER_RESTAURANT_TABLE + " userRes ON res.restaurantId = userRes.restaurantId "
             + "WHERE userRes.userId = :userId")
-    LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantByUserId(int userId);
+    LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId);
 
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();

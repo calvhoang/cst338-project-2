@@ -4,20 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.RestaurantDAO;
-import com.example.restauranttracker.Database.entities.Restaurant;
-import com.example.restauranttracker.Database.entities.User;
-import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.databinding.ActivityAddRestaurantBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 

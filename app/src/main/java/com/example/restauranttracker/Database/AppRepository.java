@@ -86,8 +86,8 @@ public class AppRepository {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
     }
 
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantByUserId(int userId) {
-        return restaurantDAO.getRestaurantByUserId(userId);
+    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+        return restaurantDAO.getRestaurantsByUserId(userId);
     }
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {

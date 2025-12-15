@@ -22,6 +22,19 @@ public class AppAdapter extends ListAdapter<RestaurantUserRestaurantJoin, AppVie
 
     @Override
     public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
+        RestaurantUserRestaurantJoin current = getItem(position);
+        holder.bind(current.toString());
+    }
 
+    public static class RestaurantDiff extends DiffUtil.ItemCallback<RestaurantUserRestaurantJoin> {
+        @Override
+        public boolean areItemsTheSame(@NonNull RestaurantUserRestaurantJoin oldItem, @NonNull RestaurantUserRestaurantJoin newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull RestaurantUserRestaurantJoin oldItem, @NonNull RestaurantUserRestaurantJoin newItem) {
+            return oldItem.equals(newItem);
+        }
     }
 }

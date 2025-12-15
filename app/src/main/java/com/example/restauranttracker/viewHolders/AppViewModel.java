@@ -31,8 +31,8 @@ public class AppViewModel extends AndroidViewModel {
         repository.insertUserRestaurant(userRestaurant);
     }
 
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantByUserId(int userId) {
-        return repository.getRestaurantByUserId(userId);
+    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+        return repository.getRestaurantsByUserId(userId);
     }
 
     public void insertRestaurantWithUser(int userId, String restaurantName, String cuisine, String city, int rating, boolean visited) {
