@@ -1,5 +1,7 @@
 package com.example.restauranttracker.Database;
 
+import static android.icu.text.MessagePattern.ArgType.SELECT;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -42,5 +44,6 @@ public interface UserDAO {
     @Query("SELECT isAdmin FROM " + AppDatabase.USER_TABLE + " WHERE id = :userId LIMIT 1")
     LiveData<Boolean> isAdmin(int userId);
 
-
+    @Query("SELECT EXISTS (SELECT 1 FROM " + AppDatabase.USER_TABLE + " WHERE username == :username)")
+    LiveData<Boolean> usernameExists(String username);
 }

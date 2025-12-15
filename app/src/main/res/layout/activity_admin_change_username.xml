@@ -7,7 +7,7 @@
     tools:context=".AdminChangeUsernameActivity">
 
     <EditText
-        android:id="@+id/userNameLoginEditText"
+        android:id="@+id/oldUsernameEditText"
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:layout_margin="16dp"
@@ -22,7 +22,7 @@
 
 
     <EditText
-        android:id="@+id/passwordLoginEditText"
+        android:id="@+id/newUsernameEditText"
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:layout_margin="16dp"
@@ -32,10 +32,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameLoginEditText" />
+        app:layout_constraintTop_toBottomOf="@id/oldUsernameEditText" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/changeUsernameButton"
         android:layout_width="match_parent"
         android:layout_height="105dp"
         android:layout_margin="16dp"
@@ -43,7 +43,7 @@
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordLoginEditText" />
+        app:layout_constraintTop_toBottomOf="@id/newUsernameEditText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

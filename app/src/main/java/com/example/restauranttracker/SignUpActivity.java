@@ -45,28 +45,29 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    private void verifyValidSignUpCredentials(){
+    private void verifyValidSignUpCredentials() {
         String username = binding.userNameSignUpEditText.getText().toString();
-
-        if(username.isEmpty()) {
+        String password = binding.passwordSignUpEditText.getText().toString();
+        if (username.isEmpty()) {
             Toast.makeText(this, "Username cannot be empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(repository.userNameExists(username)){
-            Toast.makeText(this, "Username Not Available", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String password = binding.passwordSignUpEditText.getText().toString();
-        if(password.length() < 5){
+        if (password.length() < 5) {
             Toast.makeText(this, "Password must Be at least 5 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
-        User newUser = new User(username, password);
-        repository.insertUser(newUser);
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
-            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+        repository.usernameExists(username).observe(this, usernameExits -> {
+            if (usernameExits) {
+                Toast.makeText(this, "Username Not Available", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                User newUser = new User(username, password);
+                repository.insertUser(newUser);
+                LiveData<User>userObserver = repository.getUserByUserName(username);
+                userObserver.observe(this, user -> {
+                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+                });
+            }
         });
     }
-
 }

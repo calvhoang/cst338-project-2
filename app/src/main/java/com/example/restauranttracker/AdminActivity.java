@@ -32,8 +32,7 @@ public class AdminActivity extends AppCompatActivity {
         binding.changeUsernameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                startActivity(AdminChangeUsernameActivity.adminChangeUsernameActivityIntentFactory(getApplicationContext()));
             }
         });
         binding.changePasswordButton.setOnClickListener(new View.OnClickListener() {

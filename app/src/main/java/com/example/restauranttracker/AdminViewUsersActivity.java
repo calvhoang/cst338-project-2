@@ -32,23 +32,24 @@ public class AdminViewUsersActivity extends AppCompatActivity {
 
         repository = AppRepository.getRepository(getApplication());
 
-        updateDisplay();
+        displayAllUsers();
 
     }
 
-    private void updateDisplay() {
+    private void displayAllUsers() {
         StringBuilder sb = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         repository.getAllUsers().observe(this, users -> {
             if (users.isEmpty()) {
-                binding.allUsersTextView.setText("No Users");
+                Toast.makeText(this, "No Users", Toast.LENGTH_SHORT).show();
+            } else {
+                for (User user : users) {
+                    sb.append(user.getUsername()).append("\n");
+                    sb2.append(user.getPassword()).append("\n");
+                }
+                binding.allUsersTextView.setText(sb.toString());
+                binding.allPasswordsTextView.setText(sb2.toString());
             }
-            for (User user : users) {
-                sb.append(user.getUsername()).append("\n");
-                sb2.append(user.getPassword()).append("\n");
-            }
-            binding.allUsersTextView.setText(sb.toString());
-            binding.allPasswordsTextView.setText(sb2.toString());
         });
     }
 

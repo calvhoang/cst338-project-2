@@ -52,8 +52,8 @@ public class AppRepository {
             userDAO.insert(user);
         });
     }
-    public Boolean userNameExists(String username){
-        return (AppDatabase.USER_TABLE.contains(username));
+    public LiveData<Boolean> usernameExists(String username){
+        return userDAO.usernameExists(username);//(AppDatabase.USER_TABLE.contains(username));
     }
 
     // Method to get a user by username from the database.
