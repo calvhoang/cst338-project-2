@@ -25,7 +25,7 @@ import java.util.Objects;
                         onDelete = ForeignKey.CASCADE
                 )},
         indices = {@Index("restaurantId"), @Index("userId")}
-        )
+)
 public class UserRestaurant {
     public int userId;
     public long restaurantId;

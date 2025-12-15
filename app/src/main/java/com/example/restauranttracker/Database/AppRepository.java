@@ -10,6 +10,7 @@ import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -69,6 +70,7 @@ public class AppRepository {
     public LiveData<User> getUserByUserId(int userId) {
         return userDAO.getUserByUserId(userId);
     }
+
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
@@ -83,6 +85,14 @@ public class AppRepository {
 
     public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
+    }
+
+    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+        return restaurantDAO.getRestaurantsByUserId(userId);
+    }
+
+    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+        return restaurantDAO.getRandomRestaurantByUserId(userId);
     }
 
     public void insertUserRestaurant(UserRestaurant userRestaurant) {

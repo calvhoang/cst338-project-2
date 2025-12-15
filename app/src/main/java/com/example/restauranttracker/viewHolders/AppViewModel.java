@@ -4,11 +4,15 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
+import com.example.restauranttracker.Database.RestaurantUserRestaurantJoin;
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
+
+import java.util.List;
 
 public class AppViewModel extends AndroidViewModel {
 
@@ -27,6 +31,10 @@ public class AppViewModel extends AndroidViewModel {
         repository.insertUserRestaurant(userRestaurant);
     }
 
+    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+        return repository.getRestaurantsByUserId(userId);
+    }
+
     public void insertRestaurantWithUser(int userId, String restaurantName, String cuisine, String city, int rating, boolean visited) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Restaurant restaurant = repository.getRestaurantInfo(restaurantName, cuisine, city);
@@ -42,5 +50,8 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
+    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+        return repository.getRandomRestaurantByUserId(userId);
+    }
 
 }
