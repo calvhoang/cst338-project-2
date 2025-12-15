@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -38,6 +39,13 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         appViewModel.getRestaurantsByUserId(loggedInUserId).observe(this, adapter::submitList);
 
+        binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AddRestaurantActivity.addRestaurantActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
     static Intent restaurantsActivityIntentFactory(Context context) {
