@@ -18,6 +18,10 @@ public class RandomizeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRandomizeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Randomize");
+        }
     }
 
     static Intent randomizeActivityIntentFactory(Context context) {

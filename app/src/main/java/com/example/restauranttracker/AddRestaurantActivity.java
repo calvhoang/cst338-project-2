@@ -35,6 +35,10 @@ public class AddRestaurantActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Add Restaurant");
+        }
+
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

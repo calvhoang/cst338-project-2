@@ -39,6 +39,10 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         appViewModel.getRestaurantsByUserId(loggedInUserId).observe(this, adapter::submitList);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Restaurants");
+        }
+
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

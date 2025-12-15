@@ -13,6 +13,8 @@ import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityLoginBinding;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
@@ -25,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = AppRepository.getRepository(getApplication());
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
