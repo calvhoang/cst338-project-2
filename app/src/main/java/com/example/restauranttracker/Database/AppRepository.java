@@ -91,6 +91,10 @@ public class AppRepository {
         return restaurantDAO.getRestaurantsByUserId(userId);
     }
 
+    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+        return restaurantDAO.getRandomRestaurantByUserId(userId);
+    }
+
     public void insertUserRestaurant(UserRestaurant userRestaurant) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             userRestaurantDAO.insert(userRestaurant);

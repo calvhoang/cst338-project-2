@@ -50,5 +50,8 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
+    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+        return repository.getRandomRestaurantByUserId(userId);
+    }
 
 }

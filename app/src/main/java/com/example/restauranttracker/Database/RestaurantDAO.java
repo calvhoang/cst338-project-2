@@ -36,6 +36,13 @@ public interface RestaurantDAO {
             + "WHERE userRes.userId = :userId")
     LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId);
 
+    // Gets a random restaurant by userId
+    @Query("SELECT res.*, userRes.restaurantId, userRes.rating, userRes.visited, userRes.date FROM "
+            + AppDatabase.RESTAURANT_TABLE + " res "
+            + " INNER JOIN " + AppDatabase.USER_RESTAURANT_TABLE + " userRes ON res.restaurantId = userRes.restaurantId "
+            + " WHERE userRes.userId = :userId ORDER BY RANDOM() LIMIT 1")
+    LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId);
+
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();
 }

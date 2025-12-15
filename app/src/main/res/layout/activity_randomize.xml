@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_restaurant_button"
+        android:id="@+id/randomize_button"
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_marginTop="16dp"
