@@ -28,6 +28,8 @@
             android:exported="false" />
         <activity android:name=".AdminChangeUsernameActivity"
             android:exported="false" />
+        <activity android:name=".AdminChangePasswordActivity"
+            android:exported="false" />
         <activity android:name=".AdminViewUsersActivity"
             android:exported="false" />
         <activity

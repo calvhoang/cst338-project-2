@@ -14,4 +14,8 @@
     <string name="old_username">Old Username</string>
     <string name="new_username">New Username</string>
     <string name="change_username">Change Username</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="find_user">Find User</string>
 </resources>
