@@ -23,11 +23,11 @@ public class RestaurantUserRestaurantJoin {
     public String toString() {
         return String.format(
                 name + "\n" +
-                "Cuisine: " + cuisine + "\n" +
-                "City: " + city + "\n" +
-                "Rating: " + rating + "\n" +
-                "Visited: " + visited + "\n" +
-                "Date: " + date);
+                        "Cuisine: " + cuisine + "\n" +
+                        "City: " + city + "\n" +
+                        "Rating: " + rating + "\n" +
+                        "Visited: " + visited + "\n" +
+                        "Date: " + date);
     }
 
     @Override

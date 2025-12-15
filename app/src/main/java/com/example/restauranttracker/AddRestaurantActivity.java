@@ -33,7 +33,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         binding = ActivityAddRestaurantBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel =  new ViewModelProvider(this).get(AppViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
