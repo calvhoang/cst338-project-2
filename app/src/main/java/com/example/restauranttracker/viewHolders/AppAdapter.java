@@ -10,7 +10,7 @@ import com.example.restauranttracker.Database.RestaurantUserRestaurantJoin;
 
 public class AppAdapter extends ListAdapter<RestaurantUserRestaurantJoin, AppViewHolder> {
 
-    protected AppAdapter(@NonNull DiffUtil.ItemCallback<RestaurantUserRestaurantJoin> diffCallback) {
+    public AppAdapter(@NonNull DiffUtil.ItemCallback<RestaurantUserRestaurantJoin> diffCallback) {
         super(diffCallback);
     }
 

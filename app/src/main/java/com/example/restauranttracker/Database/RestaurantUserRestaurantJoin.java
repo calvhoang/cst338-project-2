@@ -1,5 +1,7 @@
 package com.example.restauranttracker.Database;
 
+import androidx.annotation.NonNull;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,6 +17,18 @@ public class RestaurantUserRestaurantJoin {
     public int rating;
     public boolean visited;
     public LocalDateTime date;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format(
+                name + "\n" +
+                "Cuisine: " + cuisine + "\n" +
+                "City: " + city + "\n" +
+                "Rating: " + rating + "\n" +
+                "Visited: " + visited + "\n" +
+                "Date: " + date);
+    }
 
     @Override
     public boolean equals(Object o) {
