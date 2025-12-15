@@ -21,18 +21,20 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textColor= "@color/purple_500"
         android:fontFamily="serif"
+        android:textStyle="bold"
         />
 
     <EditText
         android:id="@+id/userNameSignUpEditText"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:layout_margin="16dp"
+        android:layout_height="65dp"
+        android:layout_margin="24dp"
         android:autofillHints="Please enter username"
         android:gravity="center"
         android:hint="@string/username"
         android:inputType="text"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleSignUpTextView" />
@@ -40,12 +42,13 @@
     <EditText
         android:id="@+id/passwordSignUpEditText"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:layout_margin="16dp"
+        android:layout_height="65dp"
+        android:layout_margin="24dp"
         android:autofillHints="Please enter password"
         android:gravity="center"
         android:hint="@string/password"
-        android:textSize="24sp"
+        android:textSize="20sp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userNameSignUpEditText" />
@@ -53,10 +56,11 @@
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
-        android:layout_height="105dp"
-        android:layout_margin="16dp"
+        android:layout_height="65dp"
+        android:layout_margin="24dp"
         android:text="@string/sign_up"
-        android:textSize="32sp"
+        android:textSize="20sp"
+        android:background="@drawable/button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordSignUpEditText" />
