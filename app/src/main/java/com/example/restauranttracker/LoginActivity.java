@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
@@ -55,34 +57,19 @@ public class LoginActivity extends AppCompatActivity {
         String username = binding.userNameLoginEditText.getText().toString();
         String password = binding.passwordLoginEditText.getText().toString();
 
-        if (username.isEmpty()) {
-            toastMaker("Username should not be blank.");
+        if (username.isEmpty() || password.isEmpty()) {
+            toastMaker("Username and/or password should not be blank.");
             return;
         }
-        /*
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
-            if (user != null) {
-                String password = binding.passwordLoginEditText.getText().toString();
-                if (password.equals(user.getPassword())) {
-                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-                } else {
-                    toastMaker("Invalid password.");
-                    binding.passwordLoginEditText.setSelection(0);
-                }
-            } else {
-                toastMaker(String.format("%s is not a valid username.", username));
-                binding.userNameLoginEditText.setSelection(0);
-            }
-        });*/
 
         viewModel.login(username, password, user -> {
-            if (user == null) {
-                toastMaker("Invalid username and/or password.");
-                return;
-            }
-
-            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+            runOnUiThread(() -> {
+                if (user == null) {
+                    toastMaker("Invalid username and/or password.");
+                    return;
+                }
+                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+            });
         });
     }
 

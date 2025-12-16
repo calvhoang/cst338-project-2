@@ -88,6 +88,7 @@ public class AppViewModel extends AndroidViewModel {
                 callback.accept(null);
                 return;
             }
+
             User user = new User(username, password);
             repository.insertUser(user);
             callback.accept(user);
