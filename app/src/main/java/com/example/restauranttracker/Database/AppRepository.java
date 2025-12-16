@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
@@ -93,11 +94,11 @@ public class AppRepository {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
     }
 
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+    public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
         return restaurantDAO.getRestaurantsByUserId(userId);
     }
 
-    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+    public LiveData<RestaurantUserRestaurant> getRandomRestaurantByUserId(int userId) {
         return restaurantDAO.getRandomRestaurantByUserId(userId);
     }
 

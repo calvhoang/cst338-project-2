@@ -8,7 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.RestaurantUserRestaurantJoin;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
@@ -31,7 +31,7 @@ public class AppViewModel extends AndroidViewModel {
         repository.insertUserRestaurant(userRestaurant);
     }
 
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+    public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
         return repository.getRestaurantsByUserId(userId);
     }
 
@@ -50,7 +50,7 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+    public LiveData<RestaurantUserRestaurant> getRandomRestaurantByUserId(int userId) {
         return repository.getRandomRestaurantByUserId(userId);
     }
 
