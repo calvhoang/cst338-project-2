@@ -10,6 +10,7 @@ import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
+import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 import java.util.List;
@@ -22,14 +23,6 @@ public class AppViewModel extends AndroidViewModel {
     public AppViewModel(@NonNull Application application) {
         super(application);
         repository = AppRepository.getRepository(application);
-    }
-
-    public long insertRestaurant(Restaurant restaurant) {
-        return repository.insertRestaurant(restaurant);
-    }
-
-    public void insertUserRestaurant(UserRestaurant userRestaurant) {
-        repository.insertUserRestaurant(userRestaurant);
     }
 
     public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
@@ -58,6 +51,32 @@ public class AppViewModel extends AndroidViewModel {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             RestaurantUserRestaurant random = repository.getRandomRestaurantByUserId(userId);
             callback.accept(random);
+        });
+    }
+
+    public void getUserByUsername(String username, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            User user = repository.getUserByUsername(username);
+            callback.accept(user);
+        });
+    }
+
+    public void usernameExists(String username, Consumer<Boolean> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Boolean exists = repository.usernameExistsSync(username);
+            callback.accept(exists);
+        });
+    }
+
+    public void signUp(String username, String password, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            if (repository.usernameExistsSync(username)) {
+                callback.accept(null);
+            }
+
+            User user = new User(username, password);
+            repository.insertUser(user);
+            callback.accept(user);
         });
     }
 

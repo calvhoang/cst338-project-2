@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity(tableName = AppDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     private String username;
     private String password;
     private boolean isAdmin;
@@ -22,11 +22,11 @@ public class User {
         isAdmin = false;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

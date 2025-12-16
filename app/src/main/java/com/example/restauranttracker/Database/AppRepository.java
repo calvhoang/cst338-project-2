@@ -51,21 +51,26 @@ public class AppRepository {
         return null;
     }
 
-    // Method to insert a user into the database.
-    public void insertUser(User... user) {
-        AppDatabase.databaseWriteExecutor.execute(() ->
-        {
-            userDAO.insert(user);
-        });
+    // Method to insert a user into the database and returns userId
+    public long insertUser(User user) {
+        return userDAO.insert(user);
     }
 
     public LiveData<Boolean> usernameExists(String username) {
-        return userDAO.usernameExists(username);//(AppDatabase.USER_TABLE.contains(username));
+        return userDAO.usernameExists(username);
+    }
+
+    public Boolean usernameExistsSync(String username) {
+        return userDAO.usernameExistsSync(username);
     }
 
     // Method to get a user by username from the database.
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
+    }
+
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 
     public LiveData<User> getUserByUserId(int userId) {
