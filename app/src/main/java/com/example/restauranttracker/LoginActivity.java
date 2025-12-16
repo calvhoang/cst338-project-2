@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityLoginBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 

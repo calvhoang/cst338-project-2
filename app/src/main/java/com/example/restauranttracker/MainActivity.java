@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // TODO: fix option menu username display
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);

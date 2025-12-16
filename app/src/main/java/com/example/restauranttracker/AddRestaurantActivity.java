@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.databinding.ActivityAddRestaurantBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 
