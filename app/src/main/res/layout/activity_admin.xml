@@ -7,7 +7,7 @@
     tools:context=".AdminActivity">
 
     <Button
-        android:id="@+id/restaurants_button"
+        android:id="@+id/view_users_button"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="100dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add_restaurant_button"
+        android:id="@+id/change_username_button"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -26,10 +26,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/restaurants_button" />
+        app:layout_constraintTop_toBottomOf="@+id/view_users_button" />
 
     <Button
-        android:id="@+id/randomize_button"
+        android:id="@+id/change_password_button"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
@@ -37,6 +37,17 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_restaurant_button" />
+        app:layout_constraintTop_toBottomOf="@+id/change_username_button" />
+
+    <Button
+        android:id="@+id/delete_user_button"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:text="Delete User"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_password_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

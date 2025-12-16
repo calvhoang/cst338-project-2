@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantTracker">
         <activity
+            android:name=".AdminDeleteUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:exported="false" />
         <activity
@@ -25,6 +28,15 @@
             android:exported="false" />
         <activity
             android:name=".RandomizeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminChangeUsernameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewUsersActivity"
             android:exported="false" />
         <activity
             android:name=".AdminActivity"
