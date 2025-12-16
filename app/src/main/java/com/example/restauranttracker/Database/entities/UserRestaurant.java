@@ -2,7 +2,7 @@ package com.example.restauranttracker.Database.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.PrimaryKey;
+import androidx.room.Index;
 
 import com.example.restauranttracker.Database.AppDatabase;
 
@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = AppDatabase.USER_RESTAURANT_TABLE,
+        primaryKeys = {"userId", "restaurantId"},
         foreignKeys = {
                 @ForeignKey(
                         entity = Restaurant.class,
@@ -22,31 +23,22 @@ import java.util.Objects;
                         parentColumns = "id",
                         childColumns = "userId",
                         onDelete = ForeignKey.CASCADE
-                )
-        })
+                )},
+        indices = {@Index("restaurantId"), @Index("userId")}
+)
 public class UserRestaurant {
-
-    @PrimaryKey(autoGenerate = true)
-    private int userRestaurantId;
-    private int rating;
-    private boolean hasBeenTo;
-    private LocalDateTime date;
     public int userId;
-    public int restaurantId;
+    public long restaurantId;
+    private int rating;
+    private boolean visited;
+    private LocalDateTime date;
 
-    public UserRestaurant(int userRestaurantId, int rating, boolean hasBeenTo) {
-        this.userRestaurantId = userRestaurantId;
+    public UserRestaurant(int userId, long restaurantId, int rating, boolean visited) {
+        this.userId = userId;
+        this.restaurantId = restaurantId;
         this.rating = rating;
-        this.hasBeenTo = hasBeenTo;
+        this.visited = visited;
         date = LocalDateTime.now();
-    }
-
-    public int getUserRestaurantId() {
-        return userRestaurantId;
-    }
-
-    public void setUserRestaurantId(int userRestaurantId) {
-        this.userRestaurantId = userRestaurantId;
     }
 
     public int getRating() {
@@ -57,12 +49,12 @@ public class UserRestaurant {
         this.rating = rating;
     }
 
-    public boolean isHasBeenTo() {
-        return hasBeenTo;
+    public boolean getVisited() {
+        return visited;
     }
 
-    public void setHasBeenTo(boolean hasBeenTo) {
-        this.hasBeenTo = hasBeenTo;
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public LocalDateTime getDate() {
@@ -77,11 +69,11 @@ public class UserRestaurant {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UserRestaurant that = (UserRestaurant) o;
-        return userRestaurantId == that.userRestaurantId && rating == that.rating && hasBeenTo == that.hasBeenTo && Objects.equals(date, that.date);
+        return rating == that.rating && visited == that.visited && userId == that.userId && restaurantId == that.restaurantId && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userRestaurantId, rating, hasBeenTo, date);
+        return Objects.hash(rating, visited, date, userId, restaurantId);
     }
 }

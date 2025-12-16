@@ -6,48 +6,123 @@
     android:layout_height="match_parent"
     tools:context=".AddRestaurantActivity">
 
-    <TextView
-        android:id="@+id/add_restaurant_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Add Restaurant"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/restaurant_name"
         android:layout_width="100dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="Name: "
+        android:layout_marginTop="16dp"
+        android:text="@string/name"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_restaurant_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/restaurant_input"
+        android:id="@+id/restaurant_name_input"
         android:layout_width="265dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:hint="Enter restaurant name"
+        android:hint="@string/enter_restaurant_name"
         android:inputType="textAutoComplete"
         android:padding="8dp"
         app:layout_constraintBaseline_toBaselineOf="@id/restaurant_name"
         app:layout_constraintStart_toEndOf="@id/restaurant_name" />
 
+    <TextView
+        android:id="@+id/restaurant_cuisine"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/cuisine"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_name" />
+
+    <EditText
+        android:id="@+id/restaurant_cuisine_input"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:hint="@string/enter_the_type_of_cuisine"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/restaurant_cuisine"
+        app:layout_constraintStart_toEndOf="@id/restaurant_cuisine" />
+
+    <TextView
+        android:id="@+id/restaurant_city"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/city"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_cuisine" />
+
+    <EditText
+        android:id="@+id/restaurant_city_input"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:hint="@string/enter_the_city_of_the_restaurant"
+        android:inputType="textAutoComplete"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/restaurant_city"
+        app:layout_constraintStart_toEndOf="@id/restaurant_city" />
+
+    <TextView
+        android:id="@+id/restaurant_rating"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/rating"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_city" />
+
+    <EditText
+        android:id="@+id/restaurant_rating_input"
+        android:layout_width="265dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:hint="@string/enter_the_rating_from_1_5"
+        android:inputType="number"
+        android:digits="12345"
+        android:maxLength="1"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/restaurant_rating"
+        app:layout_constraintStart_toEndOf="@id/restaurant_rating" />
+
+    <TextView
+        android:id="@+id/restaurant_visited"
+        android:layout_width="100dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/visted"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_rating" />
+
+    <CheckBox
+        android:id="@+id/restaurant_visited_checkbox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/restaurant_visited"
+        app:layout_constraintStart_toEndOf="@id/restaurant_visited" />
+
     <Button
         android:id="@+id/add_restaurant_button"
         android:layout_width="150dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        android:text="Add"
+        android:layout_marginTop="24dp"
+        android:text="@string/add"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_visited"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

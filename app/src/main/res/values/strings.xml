@@ -18,4 +18,16 @@
     <string name="new_password">New Password</string>
     <string name="change_password">Change Password</string>
     <string name="find_user">Find User</string>
+    <string name="name">Name:</string>
+    <string name="enter_restaurant_name">Enter restaurant name</string>
+    <string name="cuisine">Cuisine:</string>
+    <string name="enter_the_type_of_cuisine">Enter the type of cuisine</string>
+    <string name="city">City:</string>
+    <string name="enter_the_city_of_the_restaurant">Enter the city of the restaurant</string>
+    <string name="enter_the_rating_from_1_5">Enter the rating from 1-5</string>
+    <string name="rating">Rating:</string>
+    <string name="add">Add</string>
+    <string name="visted">Visted:</string>
+    <string name="recycler_item_placeholder">recycler item placeholder</string>
+    <string name="add_restaurant">Add Restaurant</string>
 </resources>

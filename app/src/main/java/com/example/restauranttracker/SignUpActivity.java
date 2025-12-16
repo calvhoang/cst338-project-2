@@ -3,21 +3,17 @@ package com.example.restauranttracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
-
 import com.example.restauranttracker.databinding.ActivitySignUpBinding;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -36,10 +32,12 @@ public class SignUpActivity extends AppCompatActivity {
 
         repository = AppRepository.getRepository(getApplication());
 
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               verifyValidSignUpCredentials();
+                verifyValidSignUpCredentials();
             }
         });
 
