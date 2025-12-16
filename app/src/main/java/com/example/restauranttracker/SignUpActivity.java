@@ -56,8 +56,12 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Password must Be at least 5 characters long", Toast.LENGTH_SHORT).show();
             return;
         }
-        repository.usernameExists(username).observe(this, usernameExits -> {
-            if (usernameExits) {
+        repository.usernameExists(username).observe(this, usernameExists -> {
+            if(usernameExists == null){
+                Toast.makeText(this, "usernameExists == null", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (usernameExists) {
                 Toast.makeText(this, "Username Not Available", Toast.LENGTH_SHORT).show();
             }
             else {
@@ -65,6 +69,10 @@ public class SignUpActivity extends AppCompatActivity {
                 repository.insertUser(newUser);
                 LiveData<User>userObserver = repository.getUserByUserName(username);
                 userObserver.observe(this, user -> {
+                    if(user == null){
+                        Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
                 });
             }

@@ -46,7 +46,7 @@ public class AppRepository {
     }
 
     // Method to insert a user into the database.
-    public void insertUser(User user) {
+    public void insertUser(User... user) {
         AppDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.insert(user);
@@ -67,8 +67,13 @@ public class AppRepository {
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
-
     public LiveData<List<User>> getAllUsers(){
         return userDAO.getAllUsers();
+    }
+    public void deleteUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.delete(user);
+        });
     }
 }

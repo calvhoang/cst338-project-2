@@ -34,7 +34,7 @@ public interface UserDAO {
     void deleteAll();
 
     // Retrieves a user by their username.
-    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username == :username")
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username LIMIT 1")
     LiveData<User> getUserByUserName(String username);
 
     // Retrieves a user by their user ID.
@@ -44,6 +44,6 @@ public interface UserDAO {
     @Query("SELECT isAdmin FROM " + AppDatabase.USER_TABLE + " WHERE id = :userId LIMIT 1")
     LiveData<Boolean> isAdmin(int userId);
 
-    @Query("SELECT EXISTS (SELECT 1 FROM " + AppDatabase.USER_TABLE + " WHERE username == :username)")
+    @Query("SELECT EXISTS (SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username) LIMIT 1")
     LiveData<Boolean> usernameExists(String username);
 }
