@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
@@ -41,17 +42,28 @@ public class AdminDeleteUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Username should not be blank.", Toast.LENGTH_SHORT).show();
             return;
         }
+
         LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
-            if(user != null) {
+
+        Observer<User> observer = new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if (user == null) {
+                    Toast.makeText(AdminDeleteUserActivity.this, String.format("%s does not exist.", username), Toast.LENGTH_SHORT).show();
+                    userObserver.removeObserver(this);
+                    return;
+                }
+
                 repository.deleteUser(user);
-                Toast.makeText(this, String.format("%s Deleted", username), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDeleteUserActivity.this, String.format("%s Deleted", username), Toast.LENGTH_SHORT).show();
+                userObserver.removeObserver(this);
+
                 startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
+                finish();
             }
-            else{
-                Toast.makeText(this, String.format("%s does not exist.", username), Toast.LENGTH_SHORT).show();
-            }
-        });
+        };
+
+        userObserver.observe(this, observer);
     }
 
     static Intent adminDeleteUserActivityIntentFactory(Context context) {
