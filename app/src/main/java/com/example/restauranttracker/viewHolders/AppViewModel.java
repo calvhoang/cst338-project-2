@@ -68,12 +68,26 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
-    public void signUp(String username, String password, Consumer<User> callback) {
+    public void login(String username, String password, Consumer<User> callback) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            if (repository.usernameExistsSync(username)) {
+            User user = repository.getUserByUsername(username);
+
+            if (user == null || !user.getPassword().equals(password)) {
                 callback.accept(null);
+                return;
             }
 
+            callback.accept(user);
+        });
+    }
+
+    public void signUp(String username, String password, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Boolean exists = repository.usernameExistsSync(username);
+            if (exists) {
+                callback.accept(null);
+                return;
+            }
             User user = new User(username, password);
             repository.insertUser(user);
             callback.accept(user);

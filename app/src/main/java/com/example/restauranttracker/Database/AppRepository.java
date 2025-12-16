@@ -52,8 +52,8 @@ public class AppRepository {
     }
 
     // Method to insert a user into the database and returns userId
-    public long insertUser(User user) {
-        return userDAO.insert(user);
+    public void insertUser(User user) {
+        userDAO.insert(user);
     }
 
     public LiveData<Boolean> usernameExists(String username) {

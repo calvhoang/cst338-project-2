@@ -17,9 +17,8 @@ import com.example.restauranttracker.viewHolders.AppViewModel;
 
 public class AddRestaurantActivity extends AppCompatActivity {
 
-    ActivityAddRestaurantBinding binding;
-    AppRepository repository;
-    AppViewModel viewModel;
+    private ActivityAddRestaurantBinding binding;
+    private AppViewModel viewModel;
 
     String restaurantName = "";
     String cuisine = "";

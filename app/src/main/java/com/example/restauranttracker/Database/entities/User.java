@@ -1,5 +1,6 @@
 package com.example.restauranttracker.Database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 @Entity(tableName = AppDatabase.USER_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
-    private long id;
+    private int id;
     private String username;
     private String password;
     private boolean isAdmin;
@@ -22,11 +23,11 @@ public class User {
         isAdmin = false;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -38,6 +39,7 @@ public class User {
         this.username = username;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }

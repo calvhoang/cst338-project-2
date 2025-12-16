@@ -17,7 +17,7 @@ import java.util.List;
 public interface UserDAO {
     //if a conflict occurs (e.g., inserting a user with an existing primary key), the existing record will be replaced with the new one.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(User user);
+    void insert(User user);
 
     // Deletes a specific user from the database.
     @Delete
