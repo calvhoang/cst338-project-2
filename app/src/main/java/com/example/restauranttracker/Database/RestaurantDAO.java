@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 
 import java.util.List;
 
@@ -34,14 +35,14 @@ public interface RestaurantDAO {
             + AppDatabase.RESTAURANT_TABLE + " res "
             + " INNER JOIN " + AppDatabase.USER_RESTAURANT_TABLE + " userRes ON res.restaurantId = userRes.restaurantId "
             + "WHERE userRes.userId = :userId")
-    LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId);
+    LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId);
 
     // Gets a random restaurant by userId
     @Query("SELECT res.*, userRes.restaurantId, userRes.rating, userRes.visited, userRes.date FROM "
             + AppDatabase.RESTAURANT_TABLE + " res "
             + " INNER JOIN " + AppDatabase.USER_RESTAURANT_TABLE + " userRes ON res.restaurantId = userRes.restaurantId "
             + " WHERE userRes.userId = :userId ORDER BY RANDOM() LIMIT 1")
-    LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId);
+    RestaurantUserRestaurant getRandomRestaurantByUserId(int userId);
 
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();

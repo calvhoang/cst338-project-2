@@ -27,13 +27,13 @@ import java.util.Objects;
         indices = {@Index("restaurantId"), @Index("userId")}
 )
 public class UserRestaurant {
-    public int userId;
+    public long userId;
     public long restaurantId;
     private int rating;
     private boolean visited;
     private LocalDateTime date;
 
-    public UserRestaurant(int userId, long restaurantId, int rating, boolean visited) {
+    public UserRestaurant(long userId, long restaurantId, int rating, boolean visited) {
         this.userId = userId;
         this.restaurantId = restaurantId;
         this.rating = rating;

@@ -1,7 +1,5 @@
 package com.example.restauranttracker.Database;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -19,7 +17,7 @@ import java.util.List;
 public interface UserDAO {
     //if a conflict occurs (e.g., inserting a user with an existing primary key), the existing record will be replaced with the new one.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User... user);
+    void insert(User user);
 
     // Deletes a specific user from the database.
     @Delete
@@ -37,6 +35,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username LIMIT 1")
     LiveData<User> getUserByUserName(String username);
 
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username LIMIT 1")
+    User getUserByUsername(String username);
+
     // Retrieves a user by their user ID.
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
@@ -46,4 +47,7 @@ public interface UserDAO {
 
     @Query("SELECT EXISTS (SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username) LIMIT 1")
     LiveData<Boolean> usernameExists(String username);
+
+    @Query("SELECT EXISTS (SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE username = :username) LIMIT 1")
+    Boolean usernameExistsSync(String username);
 }

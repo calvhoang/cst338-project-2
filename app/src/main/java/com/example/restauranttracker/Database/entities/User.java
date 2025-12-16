@@ -1,5 +1,6 @@
 package com.example.restauranttracker.Database.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -38,6 +39,7 @@ public class User {
         this.username = username;
     }
 
+    @NonNull
     public String getPassword() {
         return password;
     }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         repository = AppRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
 
-        if (loggedInUserId == -1) {
+        if (loggedInUserId == LOGGED_OUT) {
             Intent intent = LoginActivity.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
         updateSharedPreference();
     }
-
 
     private void setupButtonNavigation() {
         binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // TODO: fix option menu username display
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
@@ -190,8 +190,15 @@ public class MainActivity extends AppCompatActivity {
     private void logout() {
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
+        invalidateOptionsMenu();
+
         getIntent().putExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
-        startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+
+        // Prevents user from going back after logging out
+        Intent intent = LoginActivity.loginIntentFactory(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     static Intent mainActivityIntentFactory(Context context, int userId) {

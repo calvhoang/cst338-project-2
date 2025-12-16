@@ -8,11 +8,13 @@ import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.RestaurantUserRestaurantJoin;
 import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
+import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class AppViewModel extends AndroidViewModel {
 
@@ -23,15 +25,7 @@ public class AppViewModel extends AndroidViewModel {
         repository = AppRepository.getRepository(application);
     }
 
-    public long insertRestaurant(Restaurant restaurant) {
-        return repository.insertRestaurant(restaurant);
-    }
-
-    public void insertUserRestaurant(UserRestaurant userRestaurant) {
-        repository.insertUserRestaurant(userRestaurant);
-    }
-
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+    public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
         return repository.getRestaurantsByUserId(userId);
     }
 
@@ -39,19 +33,66 @@ public class AppViewModel extends AndroidViewModel {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Restaurant restaurant = repository.getRestaurantInfo(restaurantName, cuisine, city);
             long restaurantId;
+
             if (restaurant == null) {
                 Restaurant newRestaurant = new Restaurant(restaurantName, cuisine, city);
                 restaurantId = repository.insertRestaurant(newRestaurant);
             } else {
                 restaurantId = restaurant.getRestaurantId();
             }
+
             UserRestaurant userRestaurant = new UserRestaurant(userId, restaurantId, rating, visited);
             repository.insertUserRestaurant(userRestaurant);
         });
     }
 
-    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
-        return repository.getRandomRestaurantByUserId(userId);
+    // Consumer used to pass method as an argument to another method, passing a random restaurant without using LiveData
+    public void getRandomRestaurantByUserId(int userId, Consumer<RestaurantUserRestaurant> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            RestaurantUserRestaurant random = repository.getRandomRestaurantByUserId(userId);
+            callback.accept(random);
+        });
+    }
+
+    public void getUserByUsername(String username, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            User user = repository.getUserByUsername(username);
+            callback.accept(user);
+        });
+    }
+
+    public void usernameExists(String username, Consumer<Boolean> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Boolean exists = repository.usernameExistsSync(username);
+            callback.accept(exists);
+        });
+    }
+
+    public void login(String username, String password, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            User user = repository.getUserByUsername(username);
+
+            if (user == null || !user.getPassword().equals(password)) {
+                callback.accept(null);
+                return;
+            }
+
+            callback.accept(user);
+        });
+    }
+
+    public void signUp(String username, String password, Consumer<User> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Boolean exists = repository.usernameExistsSync(username);
+            if (exists) {
+                callback.accept(null);
+                return;
+            }
+
+            User user = new User(username, password);
+            repository.insertUser(user);
+            callback.accept(user);
+        });
     }
 
 }

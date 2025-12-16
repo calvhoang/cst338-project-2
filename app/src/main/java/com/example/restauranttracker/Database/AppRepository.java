@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 import com.example.restauranttracker.MainActivity;
@@ -50,20 +51,26 @@ public class AppRepository {
         return null;
     }
 
-    // Method to insert a user into the database.
-    public void insertUser(User... user) {
-        AppDatabase.databaseWriteExecutor.execute(() ->
-        {
-            userDAO.insert(user);
-        });
+    // Method to insert a user into the database and returns userId
+    public void insertUser(User user) {
+        userDAO.insert(user);
     }
-    public LiveData<Boolean> usernameExists(String username){
-        return userDAO.usernameExists(username);//(AppDatabase.USER_TABLE.contains(username));
+
+    public LiveData<Boolean> usernameExists(String username) {
+        return userDAO.usernameExists(username);
+    }
+
+    public Boolean usernameExistsSync(String username) {
+        return userDAO.usernameExistsSync(username);
     }
 
     // Method to get a user by username from the database.
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
+    }
+
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 
     public LiveData<User> getUserByUserId(int userId) {
@@ -73,13 +80,17 @@ public class AppRepository {
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
-    public LiveData<List<User>> getAllUsers(){
+
+    public LiveData<List<User>> getAllUsers() {
         return userDAO.getAllUsers();
     }
+
     public void deleteUser(User user) {
         AppDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.delete(user);
+        });
+    }
 
     public long insertRestaurant(Restaurant restaurant) {
         return restaurantDAO.insert(restaurant);
@@ -93,11 +104,11 @@ public class AppRepository {
         return restaurantDAO.getRestaurantInfo(restaurantName, cuisine, city);
     }
 
-    public LiveData<List<RestaurantUserRestaurantJoin>> getRestaurantsByUserId(int userId) {
+    public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
         return restaurantDAO.getRestaurantsByUserId(userId);
     }
 
-    public LiveData<RestaurantUserRestaurantJoin> getRandomRestaurantByUserId(int userId) {
+    public RestaurantUserRestaurant getRandomRestaurantByUserId(int userId) {
         return restaurantDAO.getRandomRestaurantByUserId(userId);
     }
 

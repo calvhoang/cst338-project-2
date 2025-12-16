@@ -9,11 +9,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityAdminChangePasswordBinding;
 
-public class AdminChangePasswordActivity  extends AppCompatActivity {
+public class AdminChangePasswordActivity extends AppCompatActivity {
 
     ActivityAdminChangePasswordBinding binding;
     private AppRepository repository;
@@ -37,12 +38,13 @@ public class AdminChangePasswordActivity  extends AppCompatActivity {
         binding.findUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            findUser();
+                findUser();
             }
         });
 
     }
-    private void changePassword(){
+
+    private void changePassword() {
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         String newPassword = binding.newPasswordEditText.getText().toString();
         if (newPassword.length() < 5) {
@@ -52,32 +54,31 @@ public class AdminChangePasswordActivity  extends AppCompatActivity {
 
         LiveData<User> userObserver = repository.getUserByUserName(usernameEditText.getText().toString());
         userObserver.observe(this, user -> {
-            if(user != null) {
+            if (user != null) {
                 user.setPassword(newPassword);
                 repository.insertUser(user);
                 Toast.makeText(this, String.format("User %s password changed to %s", user.getUsername(), newPassword), Toast.LENGTH_SHORT).show();
                 startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
-            }
-            else{
-                Toast.makeText(this, String.format("%s does not exist.",usernameEditText.getText().toString()), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, String.format("%s does not exist.", usernameEditText.getText().toString()), Toast.LENGTH_SHORT).show();
                 return;
             }
         });
 
     }
-    private void findUser(){
+
+    private void findUser() {
         String username = binding.usernameEditText.getText().toString();
 
-        if(username.isEmpty()) {
+        if (username.isEmpty()) {
             Toast.makeText(this, "Username should not be blank.", Toast.LENGTH_SHORT).show();
             return;
         }
         LiveData<User> userObserver = repository.getUserByUserName(username);
         userObserver.observe(this, user -> {
-            if(user != null) {
+            if (user != null) {
                 binding.currentPasswordTextView.setText(user.getPassword());
-            }
-            else{
+            } else {
                 Toast.makeText(this, String.format("%s does not exist.", username), Toast.LENGTH_SHORT).show();
             }
         });

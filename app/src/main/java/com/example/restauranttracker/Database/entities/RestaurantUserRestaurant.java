@@ -1,4 +1,4 @@
-package com.example.restauranttracker.Database;
+package com.example.restauranttracker.Database.entities;
 
 import androidx.annotation.NonNull;
 
@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * POJO class for joined tables Restaurant and UserRestaurant
  */
-public class RestaurantUserRestaurantJoin {
+public class RestaurantUserRestaurant {
     public long restaurantId;
     public String name;
     public String cuisine;
@@ -33,7 +33,7 @@ public class RestaurantUserRestaurantJoin {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        RestaurantUserRestaurantJoin that = (RestaurantUserRestaurantJoin) o;
+        RestaurantUserRestaurant that = (RestaurantUserRestaurant) o;
         return restaurantId == that.restaurantId && Objects.equals(name, that.name) && Objects.equals(cuisine, that.cuisine) && Objects.equals(city, that.city);
     }
 
