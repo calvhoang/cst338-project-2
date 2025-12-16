@@ -35,16 +35,14 @@ public class RandomizeActivity extends AppCompatActivity {
 
         appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
-
-        // TODO: RandomizeActivity
-        appViewModel.getRandomRestaurantByUserId(loggedInUserId).observe(this, restaurant -> {
-
-        });
-
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                appViewModel.getRandomRestaurantByUserId(loggedInUserId, restaurant -> {
+                    if (restaurant != null) {
+                        binding.randomizeRestaurant.setText(restaurant.toString());
+                    }
+                });
             }
         });
 

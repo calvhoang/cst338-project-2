@@ -13,6 +13,7 @@ import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class AppViewModel extends AndroidViewModel {
 
@@ -50,8 +51,12 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<RestaurantUserRestaurant> getRandomRestaurantByUserId(int userId) {
-        return repository.getRandomRestaurantByUserId(userId);
+    // Consumer used to pass method as an argument to another method, passing a random restaurant without using LiveData
+    public void getRandomRestaurantByUserId(int userId, Consumer<RestaurantUserRestaurant> callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            RestaurantUserRestaurant random = repository.getRandomRestaurantByUserId(userId);
+            callback.accept(random);
+        });
     }
 
 }

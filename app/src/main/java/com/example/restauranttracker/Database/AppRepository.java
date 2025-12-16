@@ -100,7 +100,7 @@ public class AppRepository {
         return restaurantDAO.getRestaurantsByUserId(userId);
     }
 
-    public LiveData<RestaurantUserRestaurant> getRandomRestaurantByUserId(int userId) {
+    public RestaurantUserRestaurant getRandomRestaurantByUserId(int userId) {
         return restaurantDAO.getRandomRestaurantByUserId(userId);
     }
 

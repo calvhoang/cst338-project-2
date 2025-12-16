@@ -42,7 +42,7 @@ public interface RestaurantDAO {
             + AppDatabase.RESTAURANT_TABLE + " res "
             + " INNER JOIN " + AppDatabase.USER_RESTAURANT_TABLE + " userRes ON res.restaurantId = userRes.restaurantId "
             + " WHERE userRes.userId = :userId ORDER BY RANDOM() LIMIT 1")
-    LiveData<RestaurantUserRestaurant> getRandomRestaurantByUserId(int userId);
+    RestaurantUserRestaurant getRandomRestaurantByUserId(int userId);
 
     @Query("DELETE FROM " + AppDatabase.RESTAURANT_TABLE)
     void deleteAll();
