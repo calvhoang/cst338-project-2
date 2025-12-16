@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -36,9 +35,10 @@ public class AdminDeleteUserActivity extends AppCompatActivity {
             }
         });
     }
-    private void deleteUser(){
+
+    private void deleteUser() {
         String username = binding.usernameEditText.getText().toString();
-        if(username.isEmpty()) {
+        if (username.isEmpty()) {
             Toast.makeText(this, "Username should not be blank.", Toast.LENGTH_SHORT).show();
             return;
         }

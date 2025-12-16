@@ -55,19 +55,18 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
         repository.usernameExists(username).observe(this, usernameExists -> {
-            if(usernameExists == null){
+            if (usernameExists == null) {
                 Toast.makeText(this, "usernameExists == null", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (usernameExists) {
                 Toast.makeText(this, "Username Not Available", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 User newUser = new User(username, password);
                 repository.insertUser(newUser);
-                LiveData<User>userObserver = repository.getUserByUserName(username);
+                LiveData<User> userObserver = repository.getUserByUserName(username);
                 userObserver.observe(this, user -> {
-                    if(user == null){
+                    if (user == null) {
                         Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
                         return;
                     }

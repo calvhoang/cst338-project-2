@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.Restaurant;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 import java.util.List;
@@ -40,12 +40,14 @@ public class AppViewModel extends AndroidViewModel {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             Restaurant restaurant = repository.getRestaurantInfo(restaurantName, cuisine, city);
             long restaurantId;
+
             if (restaurant == null) {
                 Restaurant newRestaurant = new Restaurant(restaurantName, cuisine, city);
                 restaurantId = repository.insertRestaurant(newRestaurant);
             } else {
                 restaurantId = restaurant.getRestaurantId();
             }
+
             UserRestaurant userRestaurant = new UserRestaurant(userId, restaurantId, rating, visited);
             repository.insertUserRestaurant(userRestaurant);
         });

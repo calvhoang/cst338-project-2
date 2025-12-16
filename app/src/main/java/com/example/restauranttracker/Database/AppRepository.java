@@ -58,7 +58,8 @@ public class AppRepository {
             userDAO.insert(user);
         });
     }
-    public LiveData<Boolean> usernameExists(String username){
+
+    public LiveData<Boolean> usernameExists(String username) {
         return userDAO.usernameExists(username);//(AppDatabase.USER_TABLE.contains(username));
     }
 
@@ -74,9 +75,11 @@ public class AppRepository {
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
-    public LiveData<List<User>> getAllUsers(){
+
+    public LiveData<List<User>> getAllUsers() {
         return userDAO.getAllUsers();
     }
+
     public void deleteUser(User user) {
         AppDatabase.databaseWriteExecutor.execute(() ->
         {

@@ -1,7 +1,5 @@
 package com.example.restauranttracker.Database;
 
-import static android.icu.text.MessagePattern.ArgType.SELECT;
-
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
