@@ -43,11 +43,13 @@ public class AdminChangeUsernameActivity extends BaseActivity {
         LiveData<User> userObserver = repository.getUserByUserName(oldUsername);
         userObserver.observe(this, user -> {
             if (user != null) {
-
-                repository.usernameExists(newUsername).observe(this, usernameExits -> {
+                userObserver.removeObservers(this);
+                LiveData<Boolean> booleanObserver = repository.usernameExists(newUsername);
+                booleanObserver.observe(this, usernameExits -> {
                     if (usernameExits) {
                         Toast.makeText(this, String.format("%s is not available.", newUsername), Toast.LENGTH_SHORT).show();
                     } else {
+                        booleanObserver.removeObservers(this);
                         user.setUsername(newUsername);
                         repository.updateUser(user);
                         Toast.makeText(this, String.format("%s changed to %s", oldUsername, newUsername), Toast.LENGTH_SHORT).show();
