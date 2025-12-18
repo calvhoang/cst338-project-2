@@ -22,6 +22,9 @@ public class AdminChangeUsernameActivity extends BaseActivity {
         binding = ActivityAdminChangeUsernameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Change User Username");
+        }
         repository = AppRepository.getRepository(getApplication());
 
         binding.changeUsernameButton.setOnClickListener(new View.OnClickListener() {
@@ -43,13 +46,15 @@ public class AdminChangeUsernameActivity extends BaseActivity {
         LiveData<User> userObserver = repository.getUserByUserName(oldUsername);
         userObserver.observe(this, user -> {
             if (user != null) {
-
-                repository.usernameExists(newUsername).observe(this, usernameExits -> {
+                userObserver.removeObservers(this);
+                LiveData<Boolean> booleanObserver = repository.usernameExists(newUsername);
+                booleanObserver.observe(this, usernameExits -> {
                     if (usernameExits) {
                         Toast.makeText(this, String.format("%s is not available.", newUsername), Toast.LENGTH_SHORT).show();
                     } else {
+                        booleanObserver.removeObservers(this);
                         user.setUsername(newUsername);
-                        repository.insertUser(user);
+                        repository.updateUser(user);
                         Toast.makeText(this, String.format("%s changed to %s", oldUsername, newUsername), Toast.LENGTH_SHORT).show();
                         startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
                     }

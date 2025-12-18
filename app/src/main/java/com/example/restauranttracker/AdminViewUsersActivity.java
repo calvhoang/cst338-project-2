@@ -24,6 +24,10 @@ public class AdminViewUsersActivity extends BaseActivity {
         binding = ActivityAdminViewUsersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("View Users");
+        }
+
         repository = AppRepository.getRepository(getApplication());
 
         displayAllUsers();

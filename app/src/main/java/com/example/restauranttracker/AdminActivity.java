@@ -19,6 +19,10 @@ public class AdminActivity extends BaseActivity {
         binding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Admin");
+        }
+
         repository = AppRepository.getRepository(getApplication());
 
         binding.viewUsersButton.setOnClickListener(new View.OnClickListener() {

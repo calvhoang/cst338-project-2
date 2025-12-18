@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.restauranttracker.Database.entities.User;
 
@@ -15,6 +16,9 @@ import java.util.List;
 //represents the queries that can be performed on the User table/in the database.
 @Dao
 public interface UserDAO {
+
+    @Update
+    void updateUser(User user);
     //if a conflict occurs (e.g., inserting a user with an existing primary key), the existing record will be replaced with the new one.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);

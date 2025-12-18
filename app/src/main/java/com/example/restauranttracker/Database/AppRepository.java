@@ -117,4 +117,7 @@ public class AppRepository {
             userRestaurantDAO.insert(userRestaurant);
         });
     }
+    public void updateUser(User user) {
+        AppDatabase.databaseWriteExecutor.execute(() -> userDAO.updateUser(user));
+    }
 }

@@ -26,6 +26,9 @@ public class AdminChangePasswordActivity extends BaseActivity {
         binding = ActivityAdminChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Change User Password");
+        }
         repository = AppRepository.getRepository(getApplication());
 
         binding.changePasswordButton.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +57,13 @@ public class AdminChangePasswordActivity extends BaseActivity {
         LiveData<User> userObserver = repository.getUserByUserName(usernameEditText.getText().toString());
         userObserver.observe(this, user -> {
             if (user != null) {
+                userObserver.removeObservers(this);
                 user.setPassword(newPassword);
-                repository.insertUser(user);
+                repository.updateUser(user);
                 Toast.makeText(this, String.format("User %s password changed to %s", user.getUsername(), newPassword), Toast.LENGTH_SHORT).show();
                 startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
             } else {
                 Toast.makeText(this, String.format("%s does not exist.", usernameEditText.getText().toString()), Toast.LENGTH_SHORT).show();
-                return;
             }
         });
 

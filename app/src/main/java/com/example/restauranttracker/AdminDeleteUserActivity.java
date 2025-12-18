@@ -25,6 +25,10 @@ public class AdminDeleteUserActivity extends BaseActivity {
         binding = ActivityAdminDeleteUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Delete User");
+        }
+
         repository = AppRepository.getRepository(getApplication());
 
         binding.deleteUserButton.setOnClickListener(new View.OnClickListener() {
