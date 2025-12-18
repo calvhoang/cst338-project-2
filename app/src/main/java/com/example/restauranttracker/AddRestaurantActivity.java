@@ -15,7 +15,7 @@ import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.databinding.ActivityAddRestaurantBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 
-public class AddRestaurantActivity extends AppCompatActivity {
+public class AddRestaurantActivity extends BaseActivity {
 
     ActivityAddRestaurantBinding binding;
     AppRepository repository;

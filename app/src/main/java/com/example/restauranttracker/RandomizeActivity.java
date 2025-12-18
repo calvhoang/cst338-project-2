@@ -14,7 +14,7 @@ import com.example.restauranttracker.databinding.ActivityRandomizeBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 
 
-public class RandomizeActivity extends AppCompatActivity {
+public class RandomizeActivity extends BaseActivity {
 
     ActivityRandomizeBinding binding;
     AppViewModel appViewModel;

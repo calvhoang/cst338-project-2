@@ -14,7 +14,7 @@ import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityAdminDeleteUserBinding;
 
-public class AdminDeleteUserActivity extends AppCompatActivity {
+public class AdminDeleteUserActivity extends BaseActivity {
 
     ActivityAdminDeleteUserBinding binding;
 

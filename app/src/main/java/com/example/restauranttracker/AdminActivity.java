@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.databinding.ActivityAdminBinding;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends BaseActivity {
 
     ActivityAdminBinding binding;
     private AppRepository repository;

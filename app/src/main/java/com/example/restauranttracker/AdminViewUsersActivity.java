@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class AdminViewUsersActivity extends AppCompatActivity {
+public class AdminViewUsersActivity extends BaseActivity {
 
     ActivityAdminViewUsersBinding binding;
     private AppRepository repository;

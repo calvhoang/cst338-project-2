@@ -30,4 +30,6 @@
     <string name="visted">Visted:</string>
     <string name="recycler_item_placeholder">recycler item placeholder</string>
     <string name="add_restaurant">Add Restaurant</string>
+    <string name="logout_prompt">Logout</string>
+    <string name="logout">Logout?</string>
 </resources>

@@ -65,8 +65,8 @@ public class SignUpActivity extends AppCompatActivity {
             else {
                 User newUser = new User(username, password);
                 repository.insertUser(newUser);
-                LiveData<User>userObserver = repository.getUserByUserName(username);
-                userObserver.observe(this, user -> {
+                 LiveData<User>userObserver = repository.getUserByUserName(username);
+                 userObserver.observe(this, user -> {
                     if(user == null){
                         Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show();
                         return;

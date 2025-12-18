@@ -80,6 +80,8 @@ public class AppRepository {
         AppDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.delete(user);
+        });
+    }
 
     public long insertRestaurant(Restaurant restaurant) {
         return restaurantDAO.insert(restaurant);
