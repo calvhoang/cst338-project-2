@@ -1,17 +1,22 @@
 package com.example.restauranttracker.viewHolders;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
+import com.example.restauranttracker.BaseActivity;
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.Database.entities.UserRestaurant;
+import com.example.restauranttracker.R;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -19,10 +24,18 @@ import java.util.function.Consumer;
 public class AppViewModel extends AndroidViewModel {
 
     private final AppRepository repository;
+    private final SharedPreferences sp;
+    private final Application app;
+
+    // Writable LiveData for logged in user info
+    private final MutableLiveData<User> loggedInUser = new MutableLiveData<>();
 
     public AppViewModel(@NonNull Application application) {
         super(application);
+        this.app = application;
         repository = AppRepository.getRepository(application);
+        sp = application.getSharedPreferences(application.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
     }
 
     public LiveData<List<RestaurantUserRestaurant>> getRestaurantsByUserId(int userId) {
@@ -54,45 +67,42 @@ public class AppViewModel extends AndroidViewModel {
         });
     }
 
-    public void getUserByUsername(String username, Consumer<User> callback) {
+    public void login(String username, String password) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             User user = repository.getUserByUsername(username);
-            callback.accept(user);
-        });
-    }
-
-    public void usernameExists(String username, Consumer<Boolean> callback) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            Boolean exists = repository.usernameExistsSync(username);
-            callback.accept(exists);
-        });
-    }
-
-    public void login(String username, String password, Consumer<User> callback) {
-        AppDatabase.databaseWriteExecutor.execute(() -> {
-            User user = repository.getUserByUsername(username);
-
             if (user == null || !user.getPassword().equals(password)) {
-                callback.accept(null);
+                loggedInUser.postValue(null);
                 return;
             }
 
-            callback.accept(user);
+            sp.edit().putInt(app.getString(R.string.preference_userId_key), user.getId()).apply();
+            loggedInUser.postValue(user);
         });
     }
 
-    public void signUp(String username, String password, Consumer<User> callback) {
+    public void signUp(String username, String password) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            Boolean exists = repository.usernameExistsSync(username);
-            if (exists) {
-                callback.accept(null);
+            if (repository.usernameExistsSync(username)) {
                 return;
             }
 
             User user = new User(username, password);
             repository.insertUser(user);
-            callback.accept(user);
+
+            User insertedUser = repository.getUserByUsername(username);
+
+            sp.edit().putInt(app.getString(R.string.preference_userId_key), insertedUser.getId()).apply();
+            loggedInUser.postValue(insertedUser);
         });
+    }
+
+    public void logout() {
+        sp.edit().putInt(app.getString(R.string.preference_userId_key), BaseActivity.LOGGED_OUT).apply();
+        loggedInUser.setValue(null);
+    }
+
+    public LiveData<User> getLoggedInUser() {
+        return loggedInUser;
     }
 
 }
