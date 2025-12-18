@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.restauranttracker.Database.AppRepository;
+import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityLoginBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 
@@ -18,8 +18,8 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private AppRepository repository;
     private AppViewModel viewModel;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        repository = AppRepository.getRepository(getApplication());
         viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
@@ -54,18 +53,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = binding.passwordLoginEditText.getText().toString();
 
         if (username.isEmpty() || password.isEmpty()) {
-            toastMaker("Username and/or password should not be blank.");
+            toastMaker("Username and/or password should not be blank");
             return;
         }
 
-        viewModel.login(username, password, user -> {
-            runOnUiThread(() -> {
-                if (user == null) {
-                    toastMaker("Invalid username and/or password.");
-                    return;
-                }
-                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-            });
+        viewModel.login(username, password);
+        viewModel.getLoggedInUser().observe(this, user -> {
+            if (user == null) {
+                toastMaker("Invalid username and/or password");
+                return;
+            }
+
+            toastMaker("Login success!");
+            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
         });
     }
 

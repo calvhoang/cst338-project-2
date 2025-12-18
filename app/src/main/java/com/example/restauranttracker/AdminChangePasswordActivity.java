@@ -7,14 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityAdminChangePasswordBinding;
 
-public class AdminChangePasswordActivity  extends BaseActivity {
+public class AdminChangePasswordActivity extends BaseActivity {
 
     ActivityAdminChangePasswordBinding binding;
     private AppRepository repository;

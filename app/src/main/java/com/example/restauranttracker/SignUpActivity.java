@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivitySignUpBinding;
 import com.example.restauranttracker.viewHolders.AppViewModel;
 
@@ -18,6 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignUpBinding binding;
     private AppViewModel viewModel;
+    private User user;
 
     static Intent SignUpIntentFactory(Context context) {
         return new Intent(context, SignUpActivity.class);
@@ -54,18 +56,15 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        viewModel.signUp(username, password, user -> {
-            runOnUiThread(() -> {
-                if (user == null) {
-                    toastMaker("Username is not available");
-                    return;
-                }
+        viewModel.signUp(username, password);
+        viewModel.getLoggedInUser().observe(this, user -> {
+            if (user == null) {
+                toastMaker("Username is not available");
+                return;
+            }
 
-                toastMaker("Account created");
-                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-                finish();
-            });
-
+            toastMaker("Account created");
+            startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
         });
     }
 

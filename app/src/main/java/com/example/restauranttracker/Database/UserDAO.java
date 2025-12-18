@@ -42,6 +42,9 @@ public interface UserDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
 
+    @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE id == :userId")
+    User getUserByUserIdSync(int userId);
+
     @Query("SELECT isAdmin FROM " + AppDatabase.USER_TABLE + " WHERE id = :userId LIMIT 1")
     LiveData<Boolean> isAdmin(int userId);
 

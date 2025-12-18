@@ -5,23 +5,24 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
+import com.example.restauranttracker.viewHolders.AppViewModel;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected AppRepository repository;
     protected int loggedInUserId = LOGGED_OUT;
     protected User user;
+    private AppViewModel viewModel;
 
     protected static final String MAIN_ACTIVITY_USER_ID = "com.example.restaurant_tracker.MAIN_ACTIVITY_USER_ID";
     protected static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.restaurant_tracker.SAVED_INSTANCE_STATE_USERID_KEY";
@@ -32,6 +33,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         repository = AppRepository.getRepository(getApplication());
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+
+        viewModel.getLoggedInUser().observe(this, user -> {
+            this.user = user;
+            loggedInUserId = (user == null) ? LOGGED_OUT : user.getId();
+            invalidateOptionsMenu();
+        });
+
         loginUser(savedInstanceState);
     }
 
@@ -62,29 +71,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void loginUser(Bundle savedInstanceState) {
-        SharedPreferences sp = getSharedPreferences(getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE);
-
+        if (user != null) {
+            return;
+        }
+        SharedPreferences sp = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         loggedInUserId = sp.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
 
-
-        if (loggedInUserId == LOGGED_OUT && savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)) {
-            loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
-        }
-        if (loggedInUserId == LOGGED_OUT) {
-            loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
-        }
         if (loggedInUserId == LOGGED_OUT) {
             return;
         }
-        LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, user -> {
+
+        repository.getUserByUserId(loggedInUserId).observe(this, user -> {
             this.user = user;
-            if (this.user != null) {
-                invalidateOptionsMenu();
-            }
+            invalidateOptionsMenu();
         });
     }
+
     // Update shared preference with logged in user id
     protected void updateSharedPreference() {
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
@@ -102,30 +104,31 @@ public abstract class BaseActivity extends AppCompatActivity {
         updateSharedPreference();
     }
 
-private void showLogoutDialog() {
-    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-    final AlertDialog alertDialog = alertBuilder.create();
+    private void showLogoutDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        final AlertDialog alertDialog = alertBuilder.create();
 
-    alertBuilder.setMessage("Logout?");
+        alertBuilder.setMessage("Logout?");
 
-    alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            logout();
-        }
-    });
-    alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            alertDialog.dismiss();
-        }
-    });
-    alertBuilder.create().show();
-}
+        alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                logout();
+            }
+        });
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
+        });
+        alertBuilder.create().show();
+    }
 
     // Logs out the current user and navigates to the login screen
     protected void logout() {
         loggedInUserId = LOGGED_OUT;
+        viewModel.logout();
         updateSharedPreference();
         getIntent().putExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
 

@@ -77,6 +77,10 @@ public class AppRepository {
         return userDAO.getUserByUserId(userId);
     }
 
+    public User getUserByUserIdSync(int userId) {
+        return userDAO.getUserByUserIdSync(userId);
+    }
+
     public LiveData<Boolean> isUserAdmin(int userId) {
         return userDAO.isAdmin(userId);
     }
@@ -94,10 +98,6 @@ public class AppRepository {
 
     public long insertRestaurant(Restaurant restaurant) {
         return restaurantDAO.insert(restaurant);
-    }
-
-    public LiveData<Restaurant> getRestaurantInfoLiveData(String restaurantName, String cuisine, String city) {
-        return restaurantDAO.getRestaurantInfoLiveData(restaurantName, cuisine, city);
     }
 
     public Restaurant getRestaurantInfo(String restaurantName, String cuisine, String city) {
