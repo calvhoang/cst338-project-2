@@ -14,7 +14,7 @@ import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityAdminChangePasswordBinding;
 
-public class AdminChangePasswordActivity extends AppCompatActivity {
+public class AdminChangePasswordActivity  extends BaseActivity {
 
     ActivityAdminChangePasswordBinding binding;
     private AppRepository repository;
