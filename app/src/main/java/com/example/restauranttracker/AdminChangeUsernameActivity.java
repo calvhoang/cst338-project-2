@@ -22,6 +22,9 @@ public class AdminChangeUsernameActivity extends BaseActivity {
         binding = ActivityAdminChangeUsernameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Change User Username");
+        }
         repository = AppRepository.getRepository(getApplication());
 
         binding.changeUsernameButton.setOnClickListener(new View.OnClickListener() {

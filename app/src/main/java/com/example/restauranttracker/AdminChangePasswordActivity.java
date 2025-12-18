@@ -26,6 +26,9 @@ public class AdminChangePasswordActivity extends BaseActivity {
         binding = ActivityAdminChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Change User Password");
+        }
         repository = AppRepository.getRepository(getApplication());
 
         binding.changePasswordButton.setOnClickListener(new View.OnClickListener() {
