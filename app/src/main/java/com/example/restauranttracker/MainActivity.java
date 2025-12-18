@@ -4,12 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.restauranttracker.databinding.ActivityMainBinding;
+import com.example.restauranttracker.viewHolders.AppAdapter;
+import com.example.restauranttracker.viewHolders.AppViewModel;
 
 
 public class MainActivity extends BaseActivity {
 
     private ActivityMainBinding binding;
+    private AppViewModel viewModel;
 
     public static final String TAG = "RESTAURANT_TRACKER_APP";
 
@@ -25,16 +33,18 @@ public class MainActivity extends BaseActivity {
         }
         updateSharedPreference();
         setupButtonNavigation();
+
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+
+        RecyclerView recyclerView = binding.restaurantRecyclerView;
+        final AppAdapter adapter = new AppAdapter(new AppAdapter.RestaurantDiff());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        viewModel.getRestaurantsByUserId(loggedInUserId).observe(this, adapter::submitList);
     }
 
     private void setupButtonNavigation() {
-        binding.restaurantsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = RestaurantsActivity.restaurantsActivityIntentFactory(getApplicationContext());
-                startActivity(intent);
-            }
-        });
         binding.addRestaurantButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
