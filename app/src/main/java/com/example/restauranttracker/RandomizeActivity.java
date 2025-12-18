@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,16 +34,14 @@ public class RandomizeActivity extends BaseActivity {
 
         appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
-
-        // TODO: RandomizeActivity
-        appViewModel.getRandomRestaurantByUserId(loggedInUserId).observe(this, restaurant -> {
-
-        });
-
         binding.randomizeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                appViewModel.getRandomRestaurantByUserId(loggedInUserId, restaurant -> {
+                    if (restaurant != null) {
+                        binding.randomizeRestaurant.setText(restaurant.toString());
+                    }
+                });
             }
         });
 

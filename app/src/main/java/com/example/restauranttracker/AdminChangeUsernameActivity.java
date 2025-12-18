@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.AppRepository;
 import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityAdminChangeUsernameBinding;
@@ -33,10 +32,11 @@ public class AdminChangeUsernameActivity extends BaseActivity {
             }
         });
     }
-    private void changeUsername(){
+
+    private void changeUsername() {
         String oldUsername = binding.oldUsernameEditText.getText().toString();
         String newUsername = binding.newUsernameEditText.getText().toString();
-        if(oldUsername.isEmpty() || newUsername.isEmpty()){
+        if (oldUsername.isEmpty() || newUsername.isEmpty()) {
             Toast.makeText(this, "No Username Entered", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -46,18 +46,16 @@ public class AdminChangeUsernameActivity extends BaseActivity {
             if (user != null) {
 
                 repository.usernameExists(newUsername).observe(this, usernameExits -> {
-                    if(usernameExits){
+                    if (usernameExits) {
                         Toast.makeText(this, String.format("%s is not available.", newUsername), Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         user.setUsername(newUsername);
                         repository.insertUser(user);
                         Toast.makeText(this, String.format("%s changed to %s", oldUsername, newUsername), Toast.LENGTH_SHORT).show();
                         startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
                     }
                 });
-            }
-            else{
+            } else {
                 Toast.makeText(this, String.format("%s does not exist.", oldUsername), Toast.LENGTH_SHORT).show();
             }
         });

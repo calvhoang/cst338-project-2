@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.restauranttracker.Database.AppRepository;
-import com.example.restauranttracker.Database.entities.User;
 import com.example.restauranttracker.databinding.ActivityLoginBinding;
+import com.example.restauranttracker.viewHolders.AppViewModel;
 
 import java.util.Objects;
 
@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
     private AppRepository repository;
+    private AppViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = AppRepository.getRepository(getApplication());
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
@@ -49,30 +51,21 @@ public class LoginActivity extends AppCompatActivity {
     // Verifies the user credentials and logs them in if valid.
     private void verifyUser() {
         String username = binding.userNameLoginEditText.getText().toString();
+        String password = binding.passwordLoginEditText.getText().toString();
 
-        if (username.isEmpty()) {
-            toastMaker("Username should not be blank.");
+        if (username.isEmpty() || password.isEmpty()) {
+            toastMaker("Username and/or password should not be blank.");
             return;
         }
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
-            if (user != null) {
-                String password = binding.passwordLoginEditText.getText().toString();
-                if (password.equals(user.getPassword())) {
-                    if(username.equals("admin1")){
-                        startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
-                    }
-                    else {
-                        startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-                    }
-                }else{
-                    toastMaker("Invalid password.");
-                    binding.passwordLoginEditText.setSelection(0);
+
+        viewModel.login(username, password, user -> {
+            runOnUiThread(() -> {
+                if (user == null) {
+                    toastMaker("Invalid username and/or password.");
+                    return;
                 }
-            } else {
-                toastMaker(String.format("%s is not a valid username.", username));
-                binding.userNameLoginEditText.setSelection(0);
-            }
+                startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+            });
         });
     }
 

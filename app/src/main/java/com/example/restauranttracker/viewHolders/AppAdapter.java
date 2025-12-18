@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
-import com.example.restauranttracker.Database.RestaurantUserRestaurantJoin;
+import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
 
-public class AppAdapter extends ListAdapter<RestaurantUserRestaurantJoin, AppViewHolder> {
+public class AppAdapter extends ListAdapter<RestaurantUserRestaurant, AppViewHolder> {
 
-    public AppAdapter(@NonNull DiffUtil.ItemCallback<RestaurantUserRestaurantJoin> diffCallback) {
+    public AppAdapter(@NonNull DiffUtil.ItemCallback<RestaurantUserRestaurant> diffCallback) {
         super(diffCallback);
     }
 
@@ -22,18 +22,18 @@ public class AppAdapter extends ListAdapter<RestaurantUserRestaurantJoin, AppVie
 
     @Override
     public void onBindViewHolder(@NonNull AppViewHolder holder, int position) {
-        RestaurantUserRestaurantJoin current = getItem(position);
+        RestaurantUserRestaurant current = getItem(position);
         holder.bind(current.toString());
     }
 
-    public static class RestaurantDiff extends DiffUtil.ItemCallback<RestaurantUserRestaurantJoin> {
+    public static class RestaurantDiff extends DiffUtil.ItemCallback<RestaurantUserRestaurant> {
         @Override
-        public boolean areItemsTheSame(@NonNull RestaurantUserRestaurantJoin oldItem, @NonNull RestaurantUserRestaurantJoin newItem) {
+        public boolean areItemsTheSame(@NonNull RestaurantUserRestaurant oldItem, @NonNull RestaurantUserRestaurant newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull RestaurantUserRestaurantJoin oldItem, @NonNull RestaurantUserRestaurantJoin newItem) {
+        public boolean areContentsTheSame(@NonNull RestaurantUserRestaurant oldItem, @NonNull RestaurantUserRestaurant newItem) {
             return oldItem.equals(newItem);
         }
     }
