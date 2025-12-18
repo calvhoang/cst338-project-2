@@ -49,7 +49,7 @@ public class AdminChangeUsernameActivity extends BaseActivity {
                         Toast.makeText(this, String.format("%s is not available.", newUsername), Toast.LENGTH_SHORT).show();
                     } else {
                         user.setUsername(newUsername);
-                        repository.insertUser(user);
+                        repository.updateUser(user);
                         Toast.makeText(this, String.format("%s changed to %s", oldUsername, newUsername), Toast.LENGTH_SHORT).show();
                         startActivity(AdminActivity.adminActivityIntentFactory(getApplicationContext()));
                     }
