@@ -2,6 +2,7 @@ package com.example.restauranttracker;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -127,6 +128,11 @@ private void showLogoutDialog() {
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
         getIntent().putExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
-        startActivity(LoginActivity.loginIntentFactory(getApplicationContext()));
+
+        // Prevents user from going back after logging out
+        Intent intent = LoginActivity.loginIntentFactory(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

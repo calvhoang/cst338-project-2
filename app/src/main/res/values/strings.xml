@@ -32,4 +32,7 @@
     <string name="add_restaurant">Add Restaurant</string>
     <string name="logout_prompt">Logout</string>
     <string name="logout">Logout?</string>
+    <string name="randomize">Randomize</string>
+    <string name="delete_user">Delete User</string>
+    <string name="press_button_to_randomize">Press button to randomize</string>
 </resources>
