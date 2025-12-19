@@ -13,7 +13,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.RestaurantDAO;
 import com.example.restauranttracker.Database.entities.Restaurant;
-import com.example.restauranttracker.Database.entities.User;
 
 import org.junit.After;
 import org.junit.Before;
