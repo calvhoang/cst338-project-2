@@ -12,8 +12,8 @@
 
         android:layout_width="200dp"
         android:layout_height="30dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@id/linearLayout3"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,16 +31,17 @@
         android:id="@+id/linearLayout2"
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="48dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1"
         app:layout_constraintEnd_toStartOf="@id/linearLayout4">
 
         <TextView
             android:id="@+id/all_users_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:text="@string/empty" />
     </LinearLayout>
 
@@ -49,8 +50,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="200dp"
         android:layout_height="30dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout4"
         app:layout_constraintStart_toEndOf="@id/linearLayout1"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -68,16 +69,17 @@
         android:id="@+id/linearLayout4"
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="48dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout3"
         app:layout_constraintStart_toEndOf="@id/linearLayout2">
 
         <TextView
             android:id="@+id/all_passwords_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:text="@string/empty" />
     </LinearLayout>
 
