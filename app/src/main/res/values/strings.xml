@@ -35,4 +35,5 @@
     <string name="randomize">Randomize</string>
     <string name="delete_user">Delete User</string>
     <string name="press_button_to_randomize">Press button to randomize</string>
+    <string name="empty">empty</string>
 </resources>

@@ -83,6 +83,7 @@ public class AppViewModel extends AndroidViewModel {
     public void signUp(String username, String password) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             if (repository.usernameExistsSync(username)) {
+                loggedInUser.postValue(null);
                 return;
             }
 
