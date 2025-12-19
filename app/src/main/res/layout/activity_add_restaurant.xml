@@ -26,6 +26,7 @@
         android:hint="@string/enter_restaurant_name"
         android:inputType="textAutoComplete"
         android:padding="8dp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintBaseline_toBaselineOf="@id/restaurant_name"
         app:layout_constraintStart_toEndOf="@id/restaurant_name" />
 
@@ -48,6 +49,7 @@
         android:hint="@string/enter_the_type_of_cuisine"
         android:inputType="textAutoComplete"
         android:padding="8dp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintBaseline_toBaselineOf="@id/restaurant_cuisine"
         app:layout_constraintStart_toEndOf="@id/restaurant_cuisine" />
 
@@ -70,6 +72,7 @@
         android:hint="@string/enter_the_city_of_the_restaurant"
         android:inputType="textAutoComplete"
         android:padding="8dp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintBaseline_toBaselineOf="@id/restaurant_city"
         app:layout_constraintStart_toEndOf="@id/restaurant_city" />
 
@@ -94,6 +97,7 @@
         android:digits="12345"
         android:maxLength="1"
         android:padding="8dp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintBaseline_toBaselineOf="@id/restaurant_rating"
         app:layout_constraintStart_toEndOf="@id/restaurant_rating" />
 

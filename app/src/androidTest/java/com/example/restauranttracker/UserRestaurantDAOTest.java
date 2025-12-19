@@ -23,7 +23,6 @@ public class UserRestaurantDAOTest {
     private AppDatabase db;
     private UserRestaurant userRestaurant;
 
-
     @Before
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
