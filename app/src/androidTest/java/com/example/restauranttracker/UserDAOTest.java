@@ -1,6 +1,9 @@
 package com.example.restauranttracker;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
 
@@ -21,12 +24,19 @@ import org.junit.runner.RunWith;
 public class UserDAOTest {
     private UserDAO userDao;
     private AppDatabase db;
+    private User testUser;
+    private String testUsername;
+    private String testPassword;
 
     @Before
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         userDao = db.userDao();
+
+        testUsername = "Calvin";
+        testPassword = "calvin123";
+        testUser = new User(testUsername, testPassword);
     }
 
     @After
@@ -36,20 +46,42 @@ public class UserDAOTest {
 
     // Insert user and get user by username test
     @Test
-    public void insertUser_getUserByUserId() {
-        User user = new User("david", "david123");
-        userDao.insert(user);
-        User test = userDao.getUserByUsername("david");
-        assertEquals("david", test.getUsername());
+    public void insertUser() {
+        userDao.insert(testUser);
+
+        User test = userDao.getUserByUsername(testUsername);
+
+        assertEquals(testUsername, test.getUsername());
+        assertEquals(testPassword, test.getPassword());
     }
 
     @Test
     public void updateUser() {
+        userDao.insert(testUser);
 
+        User test = userDao.getUserByUsername(testUsername);
+
+        test.setUsername("Update");
+        test.setPassword("update123");
+        test.setAdmin(true);
+        userDao.updateUser(test);
+
+        assertNotNull(test);
+        assertEquals("Update", test.getUsername());
+        assertEquals("update123", test.getPassword());
+        assertTrue(test.isAdmin());
     }
 
     @Test
     public void deleteUser() {
+        userDao.insert(testUser);
 
+        User test = userDao.getUserByUsername(testUsername);
+        assertNotNull(test);
+
+        userDao.delete(test);
+
+        User deleted = userDao.getUserByUsername(testUsername);
+        assertNull(deleted);
     }
 }
