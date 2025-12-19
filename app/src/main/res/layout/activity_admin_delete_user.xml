@@ -16,6 +16,7 @@
         android:inputType="text"
         android:gravity="center"
         android:textSize="24sp"
+        android:background="@drawable/edit_text_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

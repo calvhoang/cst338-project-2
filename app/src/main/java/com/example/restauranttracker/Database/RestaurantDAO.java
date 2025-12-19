@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.restauranttracker.Database.entities.Restaurant;
 import com.example.restauranttracker.Database.entities.RestaurantUserRestaurant;
@@ -17,6 +18,9 @@ public interface RestaurantDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Restaurant restaurant);
+
+    @Update
+    void update(Restaurant restaurant);
 
     @Delete
     void delete(Restaurant... restaurant);
