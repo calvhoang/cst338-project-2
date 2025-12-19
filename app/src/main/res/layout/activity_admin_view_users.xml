@@ -11,7 +11,7 @@
         android:id="@+id/linearLayout1"
 
         android:layout_width="200dp"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@id/linearLayout3"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/username"
-            android:textSize="15sp"/>
+            android:textSize="24sp"/>
 
     </LinearLayout>
 
@@ -40,14 +40,15 @@
             android:id="@+id/all_users_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:textSize="18sp"
+            android:text="@string/empty" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="200dp"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/linearLayout4"
         app:layout_constraintStart_toEndOf="@id/linearLayout1"
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/password"
-            android:textSize="15sp"/>
+            android:textSize="24sp"/>
 
     </LinearLayout>
 
@@ -76,7 +77,8 @@
             android:id="@+id/all_passwords_TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:textSize="18sp"
+            android:text="@string/empty" />
     </LinearLayout>
 
 
