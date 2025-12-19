@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.restauranttracker.Database.AppDatabase;
 import com.example.restauranttracker.Database.UserRestaurantDAO;
+import com.example.restauranttracker.Database.entities.UserRestaurant;
 
 import org.junit.After;
 import org.junit.Before;
@@ -20,12 +21,16 @@ import org.junit.runner.RunWith;
 public class UserRestaurantDAOTest {
     private UserRestaurantDAO userRestaurantDAO;
     private AppDatabase db;
+    private UserRestaurant userRestaurant;
+
 
     @Before
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         userRestaurantDAO = db.userRestaurantDAO();
+
+
     }
 
     @After
@@ -34,17 +39,17 @@ public class UserRestaurantDAOTest {
     }
 
     @Test
-    public void insertUser() {
+    public void insertUserRestaurant() {
 
     }
 
     @Test
-    public void updateUser() {
+    public void updateUserRestaurant() {
 
     }
 
     @Test
-    public void deleteUser() {
+    public void deleteUserRestaurant() {
 
     }
 }

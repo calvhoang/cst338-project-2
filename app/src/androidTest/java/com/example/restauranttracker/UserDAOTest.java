@@ -57,14 +57,16 @@ public class UserDAOTest {
 
     @Test
     public void updateUser() {
-        userDao.insert(testUser);
+        long id = userDao.insert(testUser);
+        testUser.setId((int) id);
 
-        User test = userDao.getUserByUsername(testUsername);
+        testUser.setUsername("Update");
+        testUser.setPassword("update123");
+        testUser.setAdmin(true);
 
-        test.setUsername("Update");
-        test.setPassword("update123");
-        test.setAdmin(true);
-        userDao.updateUser(test);
+        userDao.updateUser(testUser);
+
+        User test = userDao.getUserByUsername("Update");
 
         assertNotNull(test);
         assertEquals("Update", test.getUsername());
