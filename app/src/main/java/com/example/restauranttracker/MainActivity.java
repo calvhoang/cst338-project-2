@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         viewModel.getRestaurantsByUserId(loggedInUserId).observe(this, adapter::submitList);
+        addRandomRestaurantsForVideo();
     }
 
     private void setupButtonNavigation() {
@@ -83,5 +84,24 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
+    }
+
+    private void addRandomRestaurantsForVideo() {
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Taco Bell", "Mexican", "San Jose", 3, false);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "McDonald's", "American", "San Francisco", 3, true);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Chipotle", "Mexican", "Davis", 4, false);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Olive Garden", "Italian", "San Jose", 3, false);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Happy Lamb Hotpot", "Mongolian", "Cupertino", 4, true);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Panda Express", "Chinese", "Fremont", 3, true);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "In-N-Out", "American", "Gilroy", 4, false);
+        viewModel.insertRestaurantWithUser(
+                loggedInUserId, "Din Tai Fung", "Taiwanese", "Santa Clara", 4, false);
     }
 }
